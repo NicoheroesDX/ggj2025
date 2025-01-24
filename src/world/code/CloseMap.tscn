@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gvu32r5v4l84"]
+
+[ext_resource type="Texture2D" uid="uid://b4v5hke3xapkt" path="res://src/world/assets/worldBackgroundClose.png" id="1_tmt62"]
+
+[node name="CloseMap" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tmt62")
