@@ -9,6 +9,8 @@ func _ready():
 func _process(_delta):
 	if selected:
 		followMouse()
+	if Input.is_action_pressed("arrow_left"):
+		changeEmoji()
 
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -20,3 +22,7 @@ func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 
 func followMouse():
 	position = get_global_mouse_position() + mouse_offset
+
+func changeEmoji():
+	$CharacterBody2D/EmojiPlaceholder.texture = load("res://src/character/assets/emojis/emoji_attention.png")
+

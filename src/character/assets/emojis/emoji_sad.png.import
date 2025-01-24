@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o14fxcdhmocq"
-path="res://.godot/imported/emoji_empty.png-25adcd1c0fcb6fd9ab013a0f8667f3ac.ctex"
+uid="uid://dli50ula8exf4"
+path="res://.godot/imported/emoji_sad.png-a85d055ae87ca0a202d9a764fedcd917.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/character/assets/emoji_empty.png"
-dest_files=["res://.godot/imported/emoji_empty.png-25adcd1c0fcb6fd9ab013a0f8667f3ac.ctex"]
+source_file="res://src/character/assets/emojis/emoji_sad.png"
+dest_files=["res://.godot/imported/emoji_sad.png-a85d055ae87ca0a202d9a764fedcd917.ctex"]
 
 [params]
 
