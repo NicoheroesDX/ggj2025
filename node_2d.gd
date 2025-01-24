@@ -1,11 +1,22 @@
 extends Node2D
 
+var selected = false
+var mouse_offset = Vector2(0, 0)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func _process(_delta):
+	if selected:
+		followMouse()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			mouse_offset = position - get_global_mouse_position()
+			selected = true
+		else:
+			selected = false
+
+func followMouse():
+	position = get_global_mouse_position() + mouse_offset
