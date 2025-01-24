@@ -1,0 +1,6 @@
+enum Kind {
+	OPTIMISM,
+	FOOD,
+	ENERGY,
+	MATERIAL
+}
