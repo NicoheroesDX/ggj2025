@@ -9,8 +9,8 @@
 script = ExtResource("1_4kilx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(589, 327)
-scale = Vector2(0.468411, 0.468411)
+position = Vector2(582.689, 328.984)
+scale = Vector2(0.488605, 0.459802)
 texture = ExtResource("1_ovkek")
 
 [node name="TextEdit" type="TextEdit" parent="."]
@@ -39,15 +39,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -71.0
-offset_right = 78.0
-offset_bottom = -10.0
+offset_left = -88.0
+offset_top = -55.0
+offset_right = 88.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_wx0tx")
 theme_override_colors/default_color = Color(0.333333, 0.219608, 0.341176, 1)
-text = "New Thought Gained:"
+bbcode_enabled = true
+text = "[center]New Thought Gained:"
 
 [node name="Emoji" type="RichTextLabel" parent="."]
 anchors_preset = 8
@@ -55,10 +56,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -81.0
-offset_top = -6.0
-offset_right = -9.0
-offset_bottom = 58.0
+offset_left = -109.0
+offset_top = -11.0
+offset_right = -37.0
+offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_uqkf2")
@@ -71,10 +72,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 19.0
-offset_right = 204.0
-offset_bottom = 59.0
+offset_left = -54.0
+offset_top = 12.0
+offset_right = 178.0
+offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_wx0tx")
