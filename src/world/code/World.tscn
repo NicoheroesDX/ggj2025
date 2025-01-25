@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drbt6dsp68qrq"]
+[gd_scene load_steps=9 format=3 uid="uid://drbt6dsp68qrq"]
 
 [ext_resource type="Script" path="res://src/world/code/World.gd" id="1_w37fc"]
 [ext_resource type="PackedScene" uid="uid://gvu32r5v4l84" path="res://src/world/code/CloseMap.tscn" id="2_ef761"]
@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b7ew8gjc5cumu" path="res://src/dome/code/dome.tscn" id="4_7c0og"]
 [ext_resource type="PackedScene" uid="uid://bnmeuxen8bkfy" path="res://src/ui-overlay/overlay.tscn" id="4_s32vu"]
 [ext_resource type="Theme" uid="uid://c3w1rn4k36de2" path="res://src/global/theme/textTheme.tres" id="4_v478a"]
-[ext_resource type="PackedScene" uid="uid://bcjelexlfjmse" path="res://src/thought/discovery.tscn" id="7_wr7aw"]
 [ext_resource type="Script" path="res://src/world/code/domes.gd" id="5_dragd"]
+[ext_resource type="PackedScene" uid="uid://bcjelexlfjmse" path="res://src/thought/discovery.tscn" id="7_wr7aw"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_w37fc")
@@ -45,9 +45,6 @@ script = ExtResource("5_dragd")
 z_index = 2
 position = Vector2(-92, 1370)
 
-[node name="Discovery" parent="." instance=ExtResource("7_wr7aw")]
-position = Vector2(0, 1370)
-
 [node name="dome_westier" parent="domes" instance=ExtResource("4_7c0og")]
 position = Vector2(-19430, 1370)
 
@@ -59,6 +56,10 @@ position = Vector2(9715, 1370)
 
 [node name="dome_west" parent="domes" instance=ExtResource("4_7c0og")]
 position = Vector2(-9715, 1370)
+
+[node name="Discovery" parent="." instance=ExtResource("7_wr7aw")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="move_east_signal_map" from="domes" to="." method="_on_domes_move_east_signal_map"]
 [connection signal="move_west_signal_map" from="domes" to="." method="_on_domes_move_west_signal_map"]
