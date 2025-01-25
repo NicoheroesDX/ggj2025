@@ -4,6 +4,8 @@ var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
 var baseThoughtNames: Array[String] = ["Optimism", "O2", "Food", "Material"];
 
+var currentRound: int = 0
+
 var currentOptimism = 0
 var currentO2 = 0
 var currentFood = 0

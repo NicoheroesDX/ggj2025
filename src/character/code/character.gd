@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 signal exited_area
 
-
 var selected = false
 var mouse_offset = Vector2(0, 0)
 
@@ -90,7 +89,8 @@ func _physics_process(delta):
 	else:
 		velocity = Vector2.ZERO
 
-
+# When moving an Astronaut through the game, this checks if it is still being moved,
+# or colliding with another Astronaut
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
@@ -101,6 +101,8 @@ func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 			for body in $Area2D.get_overlapping_bodies():
 				if (body.get_groups().has("character") and (body != self and !body.selected)):
 						print("collision")
+						RoundManager.updateEventStatus.emit()
+						
 
 
 					
