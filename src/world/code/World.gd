@@ -96,3 +96,7 @@ func _on_domes_move_east_signal_map():
 func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 	if isNewToPool:
 		discoveryPopUp.visualizeNewThought(newThought);
+	
+func popCharacter():
+	pass
+	
