@@ -3,21 +3,16 @@ extends Node
 class_name ThoughtBuilder
 	
 func fillArrayOfAllThoughts() -> void:
-	define("Optimism", Thought.new("🌈", +1, 0, 0, 0));
+	define("OPTIMISM", Thought.new("🌈", +1, 0, 0, 0));
 	
 	define("O2", Thought.new("🌬️", 0, +1, 0, 0));
 	
-	define("Food", Thought.new("🍞", 0, 0, +1, 0));
+	define("FOOD", Thought.new("🍞", 0, 0, +1, 0));
 	
-	define("Material", Thought.new("🪨", 0, 0, 0, +1));
+	define("MATERIAL", Thought.new("🪨", 0, 0, 0, +1));
 	
-<<<<<<< HEAD
-	define("AIR", Thought.new("☁", +2, +2, 0, 0)) \
+	define("AIR", Thought.new("🌪️", +2, +2, 0, 0)) \
 		.addCombination("OPTIMISM", "O2");
-=======
-	define("Air", Thought.new("🌪️", +2, +2, 0, 0)) \
-	.addCombination("Optimism", "O2");
->>>>>>> f71f7034225bbeb565aeeab7e191c8a0a6d752d6
 	
 	define("TREE", Thought.new("🌳", 0, 0, 0, +10)) \
 		.addCombination("FOOD", "MATERIAL");

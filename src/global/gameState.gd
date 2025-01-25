@@ -2,7 +2,7 @@ extends Node
 
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
-var baseThoughtNames: Array[String] = ["Optimism", "O2", "Food", "Material"];
+var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
