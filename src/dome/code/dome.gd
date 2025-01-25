@@ -1,5 +1,8 @@
 extends StaticBody2D
 
+signal move_east
+signal move_west
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,3 +27,10 @@ func _on_area_2d_body_exited(body:Node2D):
 
 func _on_area_2d_body_entered(body:Node2D):
 	print("entered area", body)
+
+
+func _on_east_pressed():
+	move_east.emit()
+
+func _on_west_pressed():
+	move_west.emit()

@@ -4,6 +4,8 @@ extends Node2D
 @onready var character = load("res://src/character/code/character.tscn")
 
 func _ready():
+	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
+	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
 	initPool()
 
 func _process(delta: float) -> void:
@@ -56,8 +58,38 @@ func rerenderGridCell(index: int):
 func spawnNewCharacter():
 	var newCharacter = character.instantiate()
 	add_child(newCharacter)
+
+
+func _on_east_pressed():
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(
+		$WorldCamera,
+		"offset:x",
+		$WorldCamera.offset.x + 9715,
+		1.0
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _on_west_pressed():
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(
+		$WorldCamera,
+		"offset:x",
+		$WorldCamera.offset.x - 9715,
+		1.0
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func _on_domes_move_west_signal_map():
+	_on_west_pressed()
+func _on_domes_move_east_signal_map():
+	_on_east_pressed()
+
+
 	
 func collisionEvent():
 	# evtl. neuer Thought in den Pool (Jan und Nico)
 	# evtl. Animation (Leon)
 	pass
+
