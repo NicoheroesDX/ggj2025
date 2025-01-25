@@ -12,10 +12,49 @@ func fillArrayOfAllThoughts() -> void:
 	define("MATERIAL", Thought.new("U+1FAA8", 0, 0, 0, +1));
 	
 	define("AIR", Thought.new("U+2601", +2, +2, 0, 0)) \
-	.addCombination("OPTIMISM", "O2");
+		.addCombination("OPTIMISM", "O2");
 	
-	define("TREE", Thought.new("U+1F333", 0, 0, +2, +2)) \
-	.addCombination("FOOD", "MATERIAL");
+	define("TREE", Thought.new("🌳", 0, 0, 0, +10)) \
+		.addCombination("FOOD", "MATERIAL");
+		
+	define("BLISS", Thought.new("🍭", 20, 0, -5, 0)) \
+		.addCombination("FOOD", "OPTIMISM");
+		
+	define("SCIENCE", Thought.new("🧬", 5, 5, 0, 5)) \
+		.addCombination("MATERIAL", "OPTIMISM");
+		
+	define("PLANTING", Thought.new("🪴", 5,5,5,0)) \
+		.addCombination("TREE", "OPTIMISM");
+		
+	define("HABITAT", Thought.new("🪹", 5,0,0,5)) \
+		.addCombination("PLANTING", "OPTIMISM");
+		
+	define("STRUCTURE", Thought.new("🧱",5,0,0,10)) \
+		.addCombination("MATERIAL", "MATERIAL");
+		
+	define("WEAVE", Thought.new("🧶", 0,0,0,10)) \
+		.addCombination("O2", "MATERIAL");
+		
+	define("YEAST", Thought.new("🦠", 0,0,10,0)) \
+		.addCombination("SCIENCE", "FOOD");
+		
+	define("FILTER", Thought.new("🕸️",0,10,0,5)) \
+		.addCombination("O2", "WEAVE");
+		
+	define("WONDER", Thought.new("🌌", 15,-10,0,0)) \
+		.addCombination("SCIENCE", "OPTIMISM");
+		
+	define("FARMING", Thought.new("🌾", 0,0,10,0)) \
+		.addCombination("PLANTING", "FOOD");
+
+	define("SHELTER", Thought.new("⛺", 10,5,-5,-5)) \
+		.addCombination("FILTER", "HABITAT");
+		
+	define("SICKNESS", Thought.new("🤢 ",-10,-5,0,0))  \
+		.addCombination("YEAST", "FOOD");
+		
+	define("CARE", Thought.new("🤒",+15,0,0,0))  \
+		.addCombination("SICKNESS", "OPTIMISM");
 
 func combineTwo(first: Thought, second: Thought) -> Thought:
 	for name in GameState.allThoughtsDictionary.keys():
