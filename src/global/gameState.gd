@@ -1,7 +1,10 @@
 extends Node
 
-var maxAmountOfIdeas = 4
+var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
+var baseThoughtNames: Array[String] = ["Optimism", "O2", "Food", "Material"];
+
+var currentRound: int = 0
 
 var currentOptimism = 0
 var currentO2 = 0
@@ -13,6 +16,12 @@ var allThoughtsDictionary: Dictionary = {};
 func _ready():
 	var thoughtBuilder = ThoughtBuilder.new();
 	thoughtBuilder.fillArrayOfAllThoughts();
+	slotsInPool = allThoughtsDictionary.keys().size();
+	addDefaultThoughtsToPool()
+
+func addDefaultThoughtsToPool():
+	for name in baseThoughtNames:
+		thoughtPool.append(GameState.allThoughtsDictionary[name])
 
 func addNewThought(newThought: Thought):
 	if not newThought in thoughtPool:

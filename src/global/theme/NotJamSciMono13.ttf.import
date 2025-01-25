@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c7p0picw3ee4r"
-path="res://.godot/imported/NotJamSciMono10.ttf-960185b62e37c7969c2b983b510c0656.fontdata"
+uid="uid://dxd7kl4xdtbhw"
+path="res://.godot/imported/NotJamSciMono13.ttf-f0bbdc7c73ff2884c925dbf3af7341ab.fontdata"
 
 [deps]
 
-source_file="res://src/theme/NotJamSciMono10.ttf"
-dest_files=["res://.godot/imported/NotJamSciMono10.ttf-960185b62e37c7969c2b983b510c0656.fontdata"]
+source_file="res://src/global/theme/NotJamSciMono13.ttf"
+dest_files=["res://.godot/imported/NotJamSciMono13.ttf-f0bbdc7c73ff2884c925dbf3af7341ab.fontdata"]
 
 [params]
 
