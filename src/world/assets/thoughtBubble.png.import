@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://op44o0vl0i53"
-path="res://.godot/imported/bar_orange.png-3a7ccc48dd8611ac0cbe877030eb794c.ctex"
+uid="uid://cc4qlq0askw4c"
+path="res://.godot/imported/thoughtBubble.png-83c5d2d7f6fbec3ced30214fe4cb1692.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/ui-overlay/bar_orange.png"
-dest_files=["res://.godot/imported/bar_orange.png-3a7ccc48dd8611ac0cbe877030eb794c.ctex"]
+source_file="res://src/world/assets/thoughtBubble.png"
+dest_files=["res://.godot/imported/thoughtBubble.png-83c5d2d7f6fbec3ced30214fe4cb1692.ctex"]
 
 [params]
 

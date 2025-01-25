@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 signal exited_area
 
-
 var selected = false
 var mouse_offset = Vector2(0, 0)
 
@@ -43,14 +42,12 @@ func _ready():
 
 
 func getInitialThought():
-	var thought = GameState.getThoughtFromPool(randi() % GameState.maxAmountOfIdeas)
+	var thought = GameState.getThoughtFromPool(randi() % GameState.slotsInPool)
 	if thought != null:
-		changeEmoji()
+		changeEmoji(thought)
 		print("Thought found:", thought)
 	else:
 		print("No thought found")
-
-	
 
 func _process(delta):
 	if selected:
@@ -92,7 +89,8 @@ func _physics_process(delta):
 	else:
 		velocity = Vector2.ZERO
 
-
+# When moving an Astronaut through the game, this checks if it is still being moved,
+# or colliding with another Astronaut
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
@@ -103,14 +101,16 @@ func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 			for body in $Area2D.get_overlapping_bodies():
 				if (body.get_groups().has("character") and (body != self and !body.selected)):
 						print("collision")
+						RoundManager.updateEventStatus.emit()
+						
 
 
 					
 func followMouse():
 	position = get_global_mouse_position() + mouse_offset
 
-func changeEmoji():
-	$EmojiPlaceholder.texture = load("res://src/character/assets/emojis/emoji_attention.png")
+func changeEmoji(thought: Thought):
+	$EmojiPlaceholder.text = thought.unicodeSymbol;
 
 func _on_area_2d_area_entered(area):
 		area.get_parent().modulate = hoveringColor
@@ -139,5 +139,6 @@ func _on_combine_timer_timeout():
 	selected = false
 	self.position = startPosition
 	# GameState.combineIdeas(self)
+	# signal zum Gamestate
 	$ProgressBar.hide()
 	
