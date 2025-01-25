@@ -89,6 +89,7 @@ func combineTwo(first: Thought, second: Thought) -> Thought:
 		for combination in thought.combinations:
 			if combination.isEqualToThoughts(first, second):
 				return thought;
+				
 	
 	return null
 

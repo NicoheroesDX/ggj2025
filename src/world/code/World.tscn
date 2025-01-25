@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/world/code/domes.gd" id="5_dragd"]
 
 [ext_resource type="Theme" uid="uid://c3w1rn4k36de2" path="res://src/global/theme/textTheme.tres" id="4_v478a"]
+[ext_resource type="Script" path="res://src/world/code/domes.gd" id="5_dragd"]
 
 
 [node name="World" type="Node2D"]

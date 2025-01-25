@@ -7,16 +7,7 @@ func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
 	initPool()
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("debug_1"):
-		GameState.testPool1()
-	elif Input.is_action_just_pressed("debug_2"):
-		GameState.testPool2()
-	elif Input.is_action_just_pressed("debug_3"):
-		GameState.testPool3()
-	elif Input.is_action_just_pressed("debug_spawn"):
-		spawnNewCharacter()
+	spawnInitialCharacters()
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -55,10 +46,19 @@ func rerenderGridCell(index: int):
 		cell.queue_free();
 		renderGridCell(index)
 
-func spawnNewCharacter():
+func spawnInitialCharacters():
+	spawnNewCharacter(-500, 500)
+	spawnNewCharacter(500, 500)
+
+func spawnNewCharacter(x: float, y: float):
 	var newCharacter = character.instantiate()
+	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 
+func spawnNewCharacter(x: float, y: float):
+	var newCharacter = character.instantiate()
+	newCharacter.position = Vector2(x, y)
+	add_child(newCharacter)
 
 func _on_east_pressed():
 	var tween = get_tree().create_tween()
@@ -80,16 +80,7 @@ func _on_west_pressed():
 		1.0
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-
 func _on_domes_move_west_signal_map():
 	_on_west_pressed()
 func _on_domes_move_east_signal_map():
 	_on_east_pressed()
-
-
-	
-func collisionEvent():
-	# evtl. neuer Thought in den Pool (Jan und Nico)
-	# evtl. Animation (Leon)
-	pass
-

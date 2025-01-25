@@ -15,19 +15,18 @@ func _process(delta):
 
 
 func _on_area_2d_body_shape_exited(body_rid:RID, body:Node2D, body_shape_index:int, local_shape_index:int):
-	print("left area", body)
+	pass
 
 func _on_area_2d_body_shape_entered(body_rid:RID, body:Node2D, body_shape_index:int, local_shape_index:int):
-	print("entered area", body)
+	pass
 
 
 func _on_area_2d_body_exited(body:Node2D):
-	print("left area", body)
+	pass
 	body.emit_signal("exited_area")
 
 func _on_area_2d_body_entered(body:Node2D):
 	print("entered area", body)
-
 
 func _on_east_pressed():
 	move_east.emit()
