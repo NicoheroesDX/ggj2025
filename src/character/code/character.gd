@@ -131,7 +131,7 @@ func _on_combine_timer_timeout():
 		var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 		if (newThought != null):
 			print("This is the new name " + newThought.displayName);
-			GameState.combinationEventHappend.emit(newThought);
+			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
 			getInitialThought()
 		else:
 			print("Unsuccessfull combination...")

@@ -82,5 +82,6 @@ func _on_domes_move_west_signal_map():
 func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
-func onCombinationEvent(newThought : Thought):
-	discoveryPopUp.visualizeNewThought(newThought);
+func onCombinationEvent(newThought : Thought, isNewToPool : bool):
+	if isNewToPool:
+		discoveryPopUp.visualizeNewThought(newThought);
