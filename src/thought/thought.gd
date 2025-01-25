@@ -4,6 +4,7 @@ class_name Thought
 
 var unicodeSymbol: String
 
+var displayName: String = ""
 var optimismEffect: int
 var o2Effect: int
 var foodEffect: int

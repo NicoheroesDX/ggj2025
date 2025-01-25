@@ -22,23 +22,25 @@ func initPool():
 	renderGrid();
 
 func renderGrid():
-	for i in GameState.maxAmountOfIdeas:
+	for i in GameState.slotsInPool:
 		renderGridCell(i)
 
 func renderGridCell(index: int):
 	var cellSize = UIManager.poolCellSize;
-	var optionalIdea = GameState.getThoughtFromPool(index);
+	var optionalThought = GameState.getThoughtFromPool(index);
 	var cell;
 	
-	if (optionalIdea != null):
-		var button = Button.new()
-		button.custom_minimum_size = Vector2(cellSize, cellSize)
-		button.text = GameState.Idea.keys()[optionalIdea].left(3) + "."
-		cell = button
+	if (optionalThought != null):
+		var button = Button.new();
+		button.custom_minimum_size = Vector2(cellSize, cellSize);
+		button.text = optionalThought.unicodeSymbol;
+		button.tooltip_text = optionalThought.displayName;
+		
+		cell = button;
 	else:
 		var rect = ColorRect.new()
-		rect.custom_minimum_size = Vector2(cellSize, cellSize)  # Cell size
-		rect.color = Color.BLACK  # Fill with black
+		rect.custom_minimum_size = Vector2(cellSize, cellSize)
+		rect.color = Color(0, 0, 0, 0.2)
 		cell = rect;
 		
 	grid.add_child(cell)
