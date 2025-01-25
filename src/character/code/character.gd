@@ -48,6 +48,8 @@ func getInitialThought():
 	if thought != null:
 		changeEmoji()
 		print("Thought found:", thought)
+		if thought.name == "deathlyIll":
+			deathlyIll = true
 	else:
 		print("No thought found")
 
@@ -81,9 +83,6 @@ func _process(delta):
 		
 	if deathlyIll:
 		_on_deathly_ill()
-
-
-
 	
 
 func _physics_process(delta):
@@ -149,6 +148,7 @@ func _on_combine_timer_timeout():
 	$ProgressBar.hide()
 	
 func _on_deathly_ill():
+	GameState.heDEAD.emit(self)
 	print("he ded")
 	
 	

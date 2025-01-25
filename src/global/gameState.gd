@@ -1,7 +1,8 @@
 extends Node
 
+signal heDEAD(char: CharacterBody2D)
+
 var maxAmountOfIdeas = 4
-var ideaPool: Array[Idea] = [Idea.RAINBOW, Idea.AIR, Idea.BREAD, Idea.ROCK];
 var currentRound: int = 0
 var thoughtPool: Array[Thought] = [];
 

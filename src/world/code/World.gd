@@ -5,6 +5,7 @@ extends Node2D
 
 func _ready():
 	initPool()
+	GameState.heDEAD.connect(popCharacter)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_1"):
@@ -60,6 +61,7 @@ func collisionEvent():
 	# evtl. Animation (Leon)
 	pass
 	
-func popCharacter():
+func popCharacter(thisChar: CharacterBody2D):
+	thisChar.queue_free()
 	pass
 	

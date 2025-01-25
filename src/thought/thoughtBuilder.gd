@@ -64,6 +64,9 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("LOVE", Thought.new("💕",+20,-5,-5,0))  \
 		.addCombination("CARE","OPTIMISM");
+		
+	define("DEATHLY_ILL", Thought.new("🤮",-20,-5,-5,0))  \
+		.addCombination("SICKNESS","SICKNESS")
 
 func combineTwo(first: Thought, second: Thought) -> Thought:
 	for name in GameState.allThoughtsDictionary.keys():
