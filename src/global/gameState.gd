@@ -13,10 +13,13 @@ var currentMaterial = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
+signal combinationEventHappend(newThought: Thought)
+
 func _ready():
 	var thoughtBuilder = ThoughtBuilder.new();
 	thoughtBuilder.fillArrayOfAllThoughts();
 	slotsInPool = allThoughtsDictionary.keys().size();
+	GameState.combinationEventHappend.connect(onCombinationEvent);
 	addDefaultThoughtsToPool()
 
 func addDefaultThoughtsToPool():
@@ -33,3 +36,6 @@ func getThoughtFromPool(index: int):
 		return thoughtPool[index];
 	else:
 		return null;
+
+func onCombinationEvent(newThought: Thought):
+	addNewThought(newThought)
