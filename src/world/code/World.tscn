@@ -12,6 +12,8 @@ script = ExtResource("1_w37fc")
 [node name="CloseMap" parent="." instance=ExtResource("2_ef761")]
 
 [node name="WorldCamera" type="Camera2D" parent="."]
+offset = Vector2(0, 650)
+zoom = Vector2(0.3, 0.3)
 script = ExtResource("3_5fyou")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
