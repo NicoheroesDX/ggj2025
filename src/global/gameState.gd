@@ -2,9 +2,11 @@ extends Node
 
 signal heDEAD(char: CharacterBody2D)
 
-var maxAmountOfIdeas = 4
-var currentRound: int = 0
+var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
+var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
+
+var currentRound: int = 0
 
 var currentOptimism = 0
 var currentO2 = 0
@@ -13,9 +15,18 @@ var currentMaterial = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
+signal combinationEventHappend(newThought: Thought)
+
 func _ready():
 	var thoughtBuilder = ThoughtBuilder.new();
 	thoughtBuilder.fillArrayOfAllThoughts();
+	slotsInPool = allThoughtsDictionary.keys().size();
+	GameState.combinationEventHappend.connect(onCombinationEvent);
+	addDefaultThoughtsToPool()
+
+func addDefaultThoughtsToPool():
+	for name in baseThoughtNames:
+		thoughtPool.append(GameState.allThoughtsDictionary[name])
 
 func addNewThought(newThought: Thought):
 	if not newThought in thoughtPool:
@@ -27,3 +38,6 @@ func getThoughtFromPool(index: int):
 		return thoughtPool[index];
 	else:
 		return null;
+
+func onCombinationEvent(newThought: Thought):
+	addNewThought(newThought)

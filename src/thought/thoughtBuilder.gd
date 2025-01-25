@@ -3,15 +3,15 @@ extends Node
 class_name ThoughtBuilder
 	
 func fillArrayOfAllThoughts() -> void:
-	define("OPTIMISM", Thought.new("U+1F308", +1, 0, 0, 0));
+	define("OPTIMISM", Thought.new("🌈", +1, 0, 0, 0));
 	
-	define("O2", Thought.new("U+1F32C", 0, +1, 0, 0));
+	define("O2", Thought.new("🌬️", 0, +1, 0, 0));
 	
-	define("FOOD", Thought.new("U+1F35E", 0, 0, +1, 0));
+	define("FOOD", Thought.new("🍞", 0, 0, +1, 0));
 	
-	define("MATERIAL", Thought.new("U+1FAA8", 0, 0, 0, +1));
+	define("MATERIAL", Thought.new("🪨", 0, 0, 0, +1));
 	
-	define("AIR", Thought.new("U+2601", +2, +2, 0, 0)) \
+	define("AIR", Thought.new("🌪️", +2, +2, 0, 0)) \
 		.addCombination("OPTIMISM", "O2");
 	
 	define("TREE", Thought.new("🌳", 0, 0, 0, +10)) \
@@ -67,6 +67,24 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("DEATHLY_ILL", Thought.new("🤮",-20,-5,-5,0))  \
 		.addCombination("SICKNESS","SICKNESS")
+		
+	define("BOREDOM", Thought.new("☁", -5, 0, 0, 0)) \
+		.addCombination("AIR", "AIR");
+	
+	define("PLAYFULNESS", Thought.new("🛝", +10, 0, 0, -5)) \
+		.addCombination("BOREDOM", "BOREDOM");
+		
+	define("HATE", Thought.new("💔", -10, -5, -5, -5)) \
+		.addCombination("BOREDOM", "BOREDOM");
+		
+	define("OPPOSITION", Thought.new("💢", 0, +5, 0, 0)) \
+		.addCombination("HATE", "LOVE");
+		
+	define("BALANCE", Thought.new("☯️", 0, 0, 0, 0)) \
+		.addCombination("STRUCTURE", "OPPOSITION");
+		
+	define("MISCHIEF", Thought.new("😈", 0, +5, -5, 0)) \
+		.addCombination("PLAYFULNESS", "OPPOSITION");
 
 func combineTwo(first: Thought, second: Thought) -> Thought:
 	for name in GameState.allThoughtsDictionary.keys():
@@ -74,9 +92,11 @@ func combineTwo(first: Thought, second: Thought) -> Thought:
 		for combination in thought.combinations:
 			if combination.isEqualToThoughts(first, second):
 				return thought;
+				
 	
 	return null
 
 func define(name: String, value: Thought) -> Thought:
+	value.displayName = name;
 	GameState.allThoughtsDictionary[name] = value;
 	return GameState.allThoughtsDictionary[name];

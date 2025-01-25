@@ -4,18 +4,10 @@ extends Node2D
 @onready var character = load("res://src/character/code/character.tscn")
 
 func _ready():
+	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
+	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
 	initPool()
-	GameState.heDEAD.connect(popCharacter)
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("debug_1"):
-		GameState.testPool1()
-	elif Input.is_action_just_pressed("debug_2"):
-		GameState.testPool2()
-	elif Input.is_action_just_pressed("debug_3"):
-		GameState.testPool3()
-	elif Input.is_action_just_pressed("debug_spawn"):
-		spawnNewCharacter()
+	spawnInitialCharacters()
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -23,23 +15,25 @@ func initPool():
 	renderGrid();
 
 func renderGrid():
-	for i in GameState.maxAmountOfIdeas:
+	for i in GameState.slotsInPool:
 		renderGridCell(i)
 
 func renderGridCell(index: int):
 	var cellSize = UIManager.poolCellSize;
-	var optionalIdea = GameState.getThoughtFromPool(index);
+	var optionalThought = GameState.getThoughtFromPool(index);
 	var cell;
 	
-	if (optionalIdea != null):
-		var button = Button.new()
-		button.custom_minimum_size = Vector2(cellSize, cellSize)
-		button.text = GameState.Idea.keys()[optionalIdea].left(3) + "."
-		cell = button
+	if (optionalThought != null):
+		var button = Button.new();
+		button.custom_minimum_size = Vector2(cellSize, cellSize);
+		button.text = optionalThought.unicodeSymbol;
+		button.tooltip_text = optionalThought.displayName;
+		
+		cell = button;
 	else:
 		var rect = ColorRect.new()
-		rect.custom_minimum_size = Vector2(cellSize, cellSize)  # Cell size
-		rect.color = Color.BLACK  # Fill with black
+		rect.custom_minimum_size = Vector2(cellSize, cellSize)
+		rect.color = Color(0, 0, 0, 0.2)
 		cell = rect;
 		
 	grid.add_child(cell)
@@ -52,9 +46,15 @@ func rerenderGridCell(index: int):
 		cell.queue_free();
 		renderGridCell(index)
 
-func spawnNewCharacter():
+func spawnInitialCharacters():
+	spawnNewCharacter(-500, 500)
+	spawnNewCharacter(500, 500)
+
+func spawnNewCharacter(x: float, y: float):
 	var newCharacter = character.instantiate()
+	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
+<<<<<<< HEAD
 	
 func collisionEvent():
 	# evtl. neuer Thought in den Pool (Jan und Nico)
@@ -65,3 +65,30 @@ func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
 	pass
 	
+=======
+
+func _on_east_pressed():
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(
+		$WorldCamera,
+		"offset:x",
+		$WorldCamera.offset.x + 9715,
+		1.0
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _on_west_pressed():
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(
+		$WorldCamera,
+		"offset:x",
+		$WorldCamera.offset.x - 9715,
+		1.0
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _on_domes_move_west_signal_map():
+	_on_west_pressed()
+func _on_domes_move_east_signal_map():
+	_on_east_pressed()
+>>>>>>> master
