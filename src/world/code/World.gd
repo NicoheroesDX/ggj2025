@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var grid: GridContainer = %PoolGrid;
+@onready var grid: GridContainer = $Overlay/PoolGrid;
 @onready var character = load("res://src/character/code/character.tscn");
 @onready var discoveryPopUp : Discovery = %Discovery;
 
