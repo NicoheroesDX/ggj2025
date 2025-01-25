@@ -12,7 +12,7 @@
 [node name="Characters" type="Node" parent="MainDisplay"]
 
 [node name="CharacterBody" parent="MainDisplay/Characters" instance=ExtResource("2_sqm6x")]
-position = Vector2(-264, -62)
+position = Vector2(-1235, 1089)
 
 [node name="CharacterBody2" parent="MainDisplay/Characters" instance=ExtResource("2_sqm6x")]
-position = Vector2(178, -31)
+position = Vector2(-600, 242)

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal exited_area
+
+
 var selected = false
 var mouse_offset = Vector2(0, 0)
 
@@ -16,11 +19,17 @@ var selectedColor : Color = Color(1, 0, 1)
 var hoveringColor : Color = Color(0, 1, 0)
 var standardColor : Color = Color(1, 1, 1)
 
+var is_inside_area: bool = true
+
+var startPosition : Vector2
 
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	original_position = position
 	z_index = 1
+	exited_area.connect(on_area_exited)
+	startPosition = position
+
 	
 
 func _process(delta):
@@ -37,11 +46,14 @@ func _process(delta):
 		self.scale = Vector2(scaleSize, scaleSize)
 
 func _physics_process(delta):
-	var moveVelocity = Vector2.ZERO
-	moveVelocity.y += 10 * delta
-	velocity = moveVelocity
+	if is_inside_area:
+		var moveVelocity = Vector2.ZERO
+		moveVelocity.y += 10 * delta
+		velocity = moveVelocity
 
-	move_and_slide()
+		move_and_slide()
+	else:
+		velocity = Vector2.ZERO
 
 
 func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
@@ -64,11 +76,16 @@ func changeEmoji():
 	$EmojiPlaceholder.texture = load("res://src/character/assets/emojis/emoji_attention.png")
 
 func _on_area_2d_area_entered(area):
-	area.get_parent().modulate = hoveringColor
-	$Sprite2D.modulate = hoveringColor
+		area.get_parent().modulate = hoveringColor
+		$Sprite2D.modulate = hoveringColor 
 
 
 func _on_area_2d_area_exited(area):
-	area.get_parent().modulate = standardColor
-	$Sprite2D.modulate = standardColor
-	
+		area.get_parent().modulate = standardColor
+		$Sprite2D.modulate = standardColor
+
+func on_area_exited():
+	print("Character exited area:", self.name)
+	is_inside_area = false
+	selected = false
+	position = startPosition
