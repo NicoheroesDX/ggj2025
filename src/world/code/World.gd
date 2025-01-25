@@ -83,4 +83,5 @@ func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
 func onCombinationEvent(newThought : Thought):
-	discoveryPopUp.visualizeNewThought(newThought);
+	if not newThought in GameState.thoughtPool:
+		discoveryPopUp.visualizeNewThought(newThought);
