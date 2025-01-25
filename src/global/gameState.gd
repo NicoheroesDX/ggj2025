@@ -1,26 +1,26 @@
 extends Node
 
-enum Idea { RAINBOW, AIR, BREAD, ROCK, XXX, YYY, ZZZ }
-
 var maxAmountOfIdeas = 4
-var ideaPool: Array[Idea] = [Idea.RAINBOW, Idea.AIR, Idea.BREAD, Idea.ROCK];
+var thoughtPool: Array[Thought] = [];
 
-func addNewIdea(newIdea: Idea):
-	if not newIdea in ideaPool:
-		ideaPool.append(newIdea);
-		UIManager.updatePoolItem.emit(ideaPool.size() - 1)
+var currentOptimism = 0
+var currentO2 = 0
+var currentFood = 0
+var currentMaterial = 0
 
-func getIdeaFromPool(index: int):
-	if index < ideaPool.size() and (ideaPool[index] != null):
-		return ideaPool[index];
+var allThoughtsDictionary: Dictionary = {};
+
+func _ready():
+	var thoughtBuilder = ThoughtBuilder.new();
+	thoughtBuilder.fillArrayOfAllThoughts();
+
+func addNewThought(newThought: Thought):
+	if not newThought in thoughtPool:
+		thoughtPool.append(newThought);
+		UIManager.updatePoolItem.emit(thoughtPool.size() - 1)
+
+func getThoughtFromPool(index: int):
+	if index < thoughtPool.size() and (thoughtPool[index] != null):
+		return thoughtPool[index];
 	else:
 		return null;
-
-func testPool1():
-	addNewIdea(Idea.XXX);
-
-func testPool2():
-	addNewIdea(Idea.YYY);
-
-func testPool3():
-	addNewIdea(Idea.ZZZ);
