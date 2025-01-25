@@ -23,22 +23,27 @@ var is_inside_area: bool = true
 
 var startPosition : Vector2
 
+var spawnPosition : Vector2 = Vector2(0, 0)
+
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	original_position = position
 	z_index = 1
 	exited_area.connect(on_area_exited)
-	startPosition = position
+	startPosition = spawnPosition
+	self.rotate(randf_range(-2,2))	
 
 	
 
 func _process(delta):
 	if selected:
+		self.rotate(0.005)
 		z_index = 2
 		followMouse()
 		original_position = position
 		self.scale = Vector2(upScaledSize, upScaledSize)
 	else:
+		startPosition = position
 		z_index = 1
 		time += delta * float_speed
 		var offset_y = float_amplitude * sin(time)

@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var grid: GridContainer = %PoolGrid;
+@onready var character = load("res://src/character/code/character.tscn")
 
 func _ready():
 	initPool()
@@ -12,6 +13,8 @@ func _process(delta: float) -> void:
 		GameState.testPool2()
 	elif Input.is_action_just_pressed("debug_3"):
 		GameState.testPool3()
+	elif Input.is_action_just_pressed("debug_spawn"):
+		spawnNewCharacter()
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -47,3 +50,7 @@ func rerenderGridCell(index: int):
 	if cell != null:
 		cell.queue_free();
 		renderGridCell(index)
+
+func spawnNewCharacter():
+	var newCharacter = character.instantiate()
+	add_child(newCharacter)
