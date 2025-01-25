@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Settings="*res://src/global/settings.gd"
 GameState="*res://src/global/gameState.gd"
 UIManager="*res://src/global/theme/uiManager.gd"
+RoundManager="*res://src/global/roundmanager.gd"
 
 [display]
 
