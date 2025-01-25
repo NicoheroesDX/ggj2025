@@ -33,3 +33,4 @@ func _on_east_pressed():
 
 func _on_west_pressed():
 	move_west.emit()
+

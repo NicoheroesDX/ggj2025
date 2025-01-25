@@ -55,6 +55,11 @@ func spawnNewCharacter(x: float, y: float):
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 
+func spawnNewCharacter(x: float, y: float):
+	var newCharacter = character.instantiate()
+	newCharacter.position = Vector2(x, y)
+	add_child(newCharacter)
+
 func _on_east_pressed():
 	var tween = get_tree().create_tween()
 
