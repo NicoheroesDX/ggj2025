@@ -25,7 +25,8 @@ var startPosition : Vector2
 
 var spawnPosition : Vector2 = Vector2(0, 0)
 
-var hasCollided: bool = false
+var progress_time : float = 0
+const MAX_PROGRESS_TIME : float = 1.5
 
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
@@ -33,7 +34,21 @@ func _ready():
 	z_index = 1
 	exited_area.connect(on_area_exited)
 	startPosition = spawnPosition
-	self.rotate(randf_range(-2,2))	
+	self.rotate(randf_range(-2,2))
+	getInitialThought()
+	$ProgressBar.show_percentage = false
+	$ProgressBar.hide()
+	$CombineTimer.wait_time = MAX_PROGRESS_TIME
+
+func getInitialThought():
+	var thought = GameState.getIdeaFromPool(randi() % GameState.maxAmountOfIdeas)
+	if thought != null:
+		changeEmoji()
+		print("Thought found:", thought)
+		#$EmojiPlaceholder.texture = thought.emoji
+		#$Sprite2D.texture = thought.character
+	else:
+		print("No thought found")
 
 	
 
@@ -51,6 +66,21 @@ func _process(delta):
 		var offset_y = float_amplitude * sin(time)
 		position.y = original_position.y + offset_y
 		self.scale = Vector2(scaleSize, scaleSize)
+
+	if $CombineTimer.is_stopped() == false:
+		progress_time += delta
+		var progress = min(progress_time / MAX_PROGRESS_TIME, 1.0) * 100
+		$ProgressBar.value = progress
+		if progress_time >= MAX_PROGRESS_TIME:
+			$CombineTimer.stop()
+			_on_combine_timer_timeout()
+	else:
+		progress_time = 0
+		$ProgressBar.hide()
+
+
+
+	
 
 func _physics_process(delta):
 	if is_inside_area:
@@ -88,14 +118,29 @@ func changeEmoji():
 func _on_area_2d_area_entered(area):
 		area.get_parent().modulate = hoveringColor
 		$Sprite2D.modulate = hoveringColor 
+		$CombineTimer.start()
+		$ProgressBar.value = 0
+		$ProgressBar.show()
+		print("start timer")
 
 
 func _on_area_2d_area_exited(area):
 		area.get_parent().modulate = standardColor
 		$Sprite2D.modulate = standardColor
+		$CombineTimer.stop()
+		$ProgressBar.hide()
+		print("stop timer")
 
 func on_area_exited():
 	print("Character exited area:", self.name)
 	is_inside_area = false
 	selected = false
 	position = startPosition
+
+func _on_combine_timer_timeout():
+	print("Combine timer timeout")
+	selected = false
+	self.position = startPosition
+	# GameState.combineIdeas(self)
+	$ProgressBar.hide()
+	
