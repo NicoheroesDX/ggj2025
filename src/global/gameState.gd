@@ -4,6 +4,7 @@ enum Idea { RAINBOW, AIR, BREAD, ROCK, XXX, YYY, ZZZ }
 
 var maxAmountOfIdeas = 20
 var ideaPool: Array[Idea] = [Idea.RAINBOW, Idea.AIR, Idea.BREAD, Idea.ROCK];
+var currentRound: int = 0
 
 func addNewIdea(newIdea: Idea):
 	if not newIdea in ideaPool:

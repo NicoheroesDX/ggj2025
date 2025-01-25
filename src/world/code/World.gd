@@ -54,3 +54,8 @@ func rerenderGridCell(index: int):
 func spawnNewCharacter():
 	var newCharacter = character.instantiate()
 	add_child(newCharacter)
+	
+func collisionEvent():
+	# evtl. neuer Thought in den Pool (Jan und Nico)
+	# evtl. Animation (Leon)
+	pass
