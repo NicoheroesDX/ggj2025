@@ -21,6 +21,10 @@ Settings="*res://src/global/settings.gd"
 GameState="*res://src/global/gameState.gd"
 UIManager="*res://src/global/theme/uiManager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [global_group]
 
 character=""
