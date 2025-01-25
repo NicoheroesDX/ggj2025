@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 signal exited_area
-signal updateEventStatus
 
 var selected = false
 var mouse_offset = Vector2(0, 0)
