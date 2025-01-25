@@ -12,7 +12,7 @@ func fillArrayOfAllThoughts() -> void:
 	define("MATERIAL", Thought.new("🪨", 0, 0, 0, +1));
 	
 	define("AIR", Thought.new("🌪️", +2, +2, 0, 0)) \
-	.addCombination("OPTIMISM", "O2");
+		.addCombination("OPTIMISM", "O2");
 	
 	define("TREE", Thought.new("🌳", 0, 0, 0, +10)) \
 		.addCombination("FOOD", "MATERIAL");

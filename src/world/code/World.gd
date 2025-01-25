@@ -84,4 +84,3 @@ func _on_domes_move_west_signal_map():
 	_on_west_pressed()
 func _on_domes_move_east_signal_map():
 	_on_east_pressed()
-
