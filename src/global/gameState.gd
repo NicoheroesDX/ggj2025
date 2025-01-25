@@ -2,7 +2,7 @@ extends Node
 
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
-var baseThoughtNames: Array[String] = ["Optimism", "O2", "Food", "Material"];
+var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
@@ -13,10 +13,13 @@ var currentMaterial = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
+signal combinationEventHappend(newThought: Thought)
+
 func _ready():
 	var thoughtBuilder = ThoughtBuilder.new();
 	thoughtBuilder.fillArrayOfAllThoughts();
 	slotsInPool = allThoughtsDictionary.keys().size();
+	GameState.combinationEventHappend.connect(onCombinationEvent);
 	addDefaultThoughtsToPool()
 
 func addDefaultThoughtsToPool():
@@ -33,3 +36,6 @@ func getThoughtFromPool(index: int):
 		return thoughtPool[index];
 	else:
 		return null;
+
+func onCombinationEvent(newThought: Thought):
+	addNewThought(newThought)

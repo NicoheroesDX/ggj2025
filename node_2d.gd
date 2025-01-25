@@ -29,8 +29,3 @@ func followMouse():
 
 func changeEmoji():
 	$CharacterBody2D/EmojiPlaceholder.texture = load("res://src/character/assets/emojis/emoji_attention.png")
-
-func _on_area_2d_body_entered(body):
-	if (body != %CharacterBody):
-		if(!body.):
-			print("selected", body)

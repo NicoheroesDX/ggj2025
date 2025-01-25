@@ -5,16 +5,7 @@ extends Node2D
 
 func _ready():
 	initPool()
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("debug_1"):
-		GameState.testPool1()
-	elif Input.is_action_just_pressed("debug_2"):
-		GameState.testPool2()
-	elif Input.is_action_just_pressed("debug_3"):
-		GameState.testPool3()
-	elif Input.is_action_just_pressed("debug_spawn"):
-		spawnNewCharacter()
+	spawnInitialCharacters()
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -53,8 +44,13 @@ func rerenderGridCell(index: int):
 		cell.queue_free();
 		renderGridCell(index)
 
-func spawnNewCharacter():
+func spawnInitialCharacters():
+	spawnNewCharacter(-500, 500)
+	spawnNewCharacter(500, 500)
+
+func spawnNewCharacter(x: float, y: float):
 	var newCharacter = character.instantiate()
+	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 	
 func collisionEvent():

@@ -22,9 +22,10 @@ var is_inside_area: bool = true
 
 var startPosition : Vector2
 
-var spawnPosition : Vector2 = Vector2(0, 500)
-
 var randomColor : Color
+
+var currentThought: Thought
+var thoughtToCombineWith: Thought
 
 var progress_time : float = 0
 const MAX_PROGRESS_TIME : float = 1.5
@@ -33,7 +34,6 @@ func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	z_index = 1
 	exited_area.connect(on_area_exited)
-	position = spawnPosition
 	self.rotate(randf_range(-2,2))
 	getInitialThought()
 	$ProgressBar.show_percentage = false
@@ -42,14 +42,13 @@ func _ready():
 
 
 func getInitialThought():
-	var thought = GameState.getThoughtFromPool(randi() % GameState.slotsInPool)
-	if thought != null:
-		changeEmoji(thought)
-		print("Thought found:", thought)
-	else:
-		print("No thought found")
+	currentThought = GameState.getThoughtFromPool(randi_range(0, GameState.thoughtPool.size() - 1))
+	changeEmoji(currentThought)
 
 func _process(delta):
+	if Input.is_action_just_pressed("debug_spawn"):
+		getInitialThought()
+	
 	if selected:
 		z_index = 2
 		followMouse()
@@ -75,10 +74,6 @@ func _process(delta):
 		progress_time = 0
 		$ProgressBar.hide()
 
-
-
-	
-
 func _physics_process(delta):
 	if is_inside_area:
 		var moveVelocity = Vector2.ZERO
@@ -100,12 +95,8 @@ func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 			selected = false
 			for body in $Area2D.get_overlapping_bodies():
 				if (body.get_groups().has("character") and (body != self and !body.selected)):
-						print("collision")
-						RoundManager.updateEventStatus.emit()
-						
+					RoundManager.updateEventStatus.emit()
 
-
-					
 func followMouse():
 	position = get_global_mouse_position() + mouse_offset
 
@@ -118,26 +109,32 @@ func _on_area_2d_area_entered(area):
 		$CombineTimer.start()
 		$ProgressBar.value = 0
 		$ProgressBar.show()
-		print("start timer")
-
+		thoughtToCombineWith = area.get_parent().currentThought
 
 func _on_area_2d_area_exited(area):
 		area.get_parent().modulate = standardColor
 		$Sprite2D.modulate = standardColor
 		$CombineTimer.stop()
 		$ProgressBar.hide()
-		print("stop timer")
+		thoughtToCombineWith = null
 
 func on_area_exited():
-	print("Character exited area:", self.name)
 	is_inside_area = false
 	selected = false
-	position = spawnPosition
 
 func _on_combine_timer_timeout():
-	print("Combine timer timeout")
-	selected = false
 	self.position = startPosition
-	# GameState.combineIdeas(self)
-	$ProgressBar.hide()
 	
+	if (selected):
+		var thoughtBuilder = ThoughtBuilder.new();
+		$ProgressBar.hide()
+		var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
+		if (newThought != null):
+			print("This is the new name " + newThought.displayName);
+			GameState.combinationEventHappend.emit(newThought);
+			getInitialThought()
+		else:
+			print("Unsuccessfull combination...")
+			getInitialThought()
+			
+	selected = false

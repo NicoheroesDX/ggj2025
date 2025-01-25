@@ -3,16 +3,16 @@ extends Node
 class_name ThoughtBuilder
 	
 func fillArrayOfAllThoughts() -> void:
-	define("Optimism", Thought.new("🌈", +1, 0, 0, 0));
+	define("OPTIMISM", Thought.new("🌈", +1, 0, 0, 0));
 	
 	define("O2", Thought.new("🌬️", 0, +1, 0, 0));
 	
-	define("Food", Thought.new("🍞", 0, 0, +1, 0));
+	define("FOOD", Thought.new("🍞", 0, 0, +1, 0));
 	
-	define("Material", Thought.new("🪨", 0, 0, 0, +1));
+	define("MATERIAL", Thought.new("🪨", 0, 0, 0, +1));
 	
-	define("Air", Thought.new("🌪️", +2, +2, 0, 0)) \
-	.addCombination("Optimism", "O2");
+	define("AIR", Thought.new("🌪️", +2, +2, 0, 0)) \
+	.addCombination("OPTIMISM", "O2");
 	
 	define("TREE", Thought.new("🌳", 0, 0, 0, +10)) \
 		.addCombination("FOOD", "MATERIAL");
@@ -71,6 +71,7 @@ func combineTwo(first: Thought, second: Thought) -> Thought:
 		for combination in thought.combinations:
 			if combination.isEqualToThoughts(first, second):
 				return thought;
+				
 	
 	return null
 
