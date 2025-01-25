@@ -13,6 +13,7 @@ var currentMaterial = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
+# signal sending
 signal combinationEventHappend(newThought: Thought)
 
 func _ready():
@@ -37,5 +38,6 @@ func getThoughtFromPool(index: int):
 	else:
 		return null;
 
+# ui event
 func onCombinationEvent(newThought: Thought):
 	addNewThought(newThought)
