@@ -23,30 +23,30 @@ var is_inside_area: bool = true
 
 var startPosition : Vector2
 
-var spawnPosition : Vector2 = Vector2(0, 0)
+var spawnPosition : Vector2 = Vector2(0, 500)
+
+var randomColor : Color
 
 var progress_time : float = 0
 const MAX_PROGRESS_TIME : float = 1.5
 
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
-	original_position = position
 	z_index = 1
 	exited_area.connect(on_area_exited)
-	startPosition = spawnPosition
+	position = spawnPosition
 	self.rotate(randf_range(-2,2))
 	getInitialThought()
 	$ProgressBar.show_percentage = false
 	$ProgressBar.hide()
 	$CombineTimer.wait_time = MAX_PROGRESS_TIME
 
+
 func getInitialThought():
 	var thought = GameState.getIdeaFromPool(randi() % GameState.maxAmountOfIdeas)
 	if thought != null:
 		changeEmoji()
 		print("Thought found:", thought)
-		#$EmojiPlaceholder.texture = thought.emoji
-		#$Sprite2D.texture = thought.character
 	else:
 		print("No thought found")
 
@@ -54,7 +54,6 @@ func getInitialThought():
 
 func _process(delta):
 	if selected:
-		self.rotate(0.005)
 		z_index = 2
 		followMouse()
 		original_position = position
@@ -64,8 +63,9 @@ func _process(delta):
 		z_index = 1
 		time += delta * float_speed
 		var offset_y = float_amplitude * sin(time)
-		position.y = original_position.y + offset_y
+		position.y = position.y + offset_y * 0.3
 		self.scale = Vector2(scaleSize, scaleSize)
+		self.rotate(0.01)
 
 	if $CombineTimer.is_stopped() == false:
 		progress_time += delta
@@ -132,7 +132,7 @@ func on_area_exited():
 	print("Character exited area:", self.name)
 	is_inside_area = false
 	selected = false
-	position = startPosition
+	position = spawnPosition
 
 func _on_combine_timer_timeout():
 	print("Combine timer timeout")

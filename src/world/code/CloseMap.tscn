@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://gvu32r5v4l84"]
 
-[ext_resource type="Texture2D" uid="uid://b4v5hke3xapkt" path="res://src/world/assets/worldBackgroundClose.png" id="1_tmt62"]
+[ext_resource type="Texture2D" uid="uid://dq063tk13h1qa" path="res://src/world/assets/background_planet.png" id="1_7t2ua"]
 
 [node name="CloseMap" type="Node2D"]
 
 [node name="MapGraphic" type="Sprite2D" parent="."]
-texture = ExtResource("1_tmt62")
+scale = Vector2(5, 5)
+texture = ExtResource("1_7t2ua")
