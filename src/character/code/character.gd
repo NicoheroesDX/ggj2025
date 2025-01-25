@@ -30,6 +30,8 @@ var randomColor : Color
 var progress_time : float = 0
 const MAX_PROGRESS_TIME : float = 1.5
 
+var deathlyIll : bool = false
+
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	z_index = 1
@@ -77,6 +79,9 @@ func _process(delta):
 	else:
 		progress_time = 0
 		$ProgressBar.hide()
+		
+	if deathlyIll:
+		_on_deathly_ill()
 
 
 
@@ -140,4 +145,8 @@ func _on_combine_timer_timeout():
 	self.position = startPosition
 	# GameState.combineIdeas(self)
 	$ProgressBar.hide()
+	
+func _on_deathly_ill():
+	print("he ded")
+	
 	

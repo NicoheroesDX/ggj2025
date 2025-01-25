@@ -54,3 +54,7 @@ func rerenderGridCell(index: int):
 func spawnNewCharacter():
 	var newCharacter = character.instantiate()
 	add_child(newCharacter)
+	
+func popCharacter():
+	pass
+	
