@@ -36,5 +36,25 @@ texture = ExtResource("2_omiqf")
 position = Vector2(-91, -590)
 texture = ExtResource("3_qmeqp")
 
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="WEST" type="Button" parent="Navigation"]
+unique_name_in_owner = true
+offset_left = -1921.0
+offset_top = -474.0
+offset_right = -1301.0
+offset_bottom = -266.0
+text = "WEST"
+
+[node name="EAST" type="Button" parent="Navigation"]
+unique_name_in_owner = true
+offset_left = 1559.0
+offset_top = -428.0
+offset_right = 2179.0
+offset_bottom = -219.0
+text = "EAST"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="Navigation/WEST" to="." method="_on_west_pressed"]
+[connection signal="pressed" from="Navigation/EAST" to="." method="_on_east_pressed"]
