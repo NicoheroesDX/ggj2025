@@ -139,5 +139,6 @@ func _on_combine_timer_timeout():
 	selected = false
 	self.position = startPosition
 	# GameState.combineIdeas(self)
+	# signal zum Gamestate
 	$ProgressBar.hide()
 	
