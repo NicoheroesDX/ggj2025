@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://c3w1rn4k36de2"]
 
-[ext_resource type="FontFile" uid="uid://c7p0picw3ee4r" path="res://src/theme/NotJamSciMono10.ttf" id="1_p2bsa"]
+[ext_resource type="FontFile" uid="uid://c7p0picw3ee4r" path="res://src/global/theme/NotJamSciMono10.ttf" id="1_p2bsa"]
 
 [resource]
 default_font = ExtResource("1_p2bsa")

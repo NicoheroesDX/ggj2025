@@ -42,14 +42,12 @@ func _ready():
 
 
 func getInitialThought():
-	var thought = GameState.getThoughtFromPool(randi() % GameState.maxAmountOfIdeas)
+	var thought = GameState.getThoughtFromPool(randi() % GameState.slotsInPool)
 	if thought != null:
-		changeEmoji()
+		changeEmoji(thought)
 		print("Thought found:", thought)
 	else:
 		print("No thought found")
-
-	
 
 func _process(delta):
 	if selected:
@@ -111,8 +109,8 @@ func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 func followMouse():
 	position = get_global_mouse_position() + mouse_offset
 
-func changeEmoji():
-	$EmojiPlaceholder.texture = load("res://src/character/assets/emojis/emoji_attention.png")
+func changeEmoji(thought: Thought):
+	$EmojiPlaceholder.text = thought.unicodeSymbol;
 
 func _on_area_2d_area_entered(area):
 		area.get_parent().modulate = hoveringColor
