@@ -141,4 +141,3 @@ func _on_combine_timer_timeout():
 	# GameState.combineIdeas(self)
 	$ProgressBar.hide()
 	
-
