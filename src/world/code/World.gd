@@ -27,7 +27,7 @@ func renderGrid():
 
 func renderGridCell(index: int):
 	var cellSize = UIManager.poolCellSize;
-	var optionalIdea = GameState.getIdeaFromPool(index);
+	var optionalIdea = GameState.getThoughtFromPool(index);
 	var cell;
 	
 	if (optionalIdea != null):
