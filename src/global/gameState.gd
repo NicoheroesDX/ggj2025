@@ -3,6 +3,12 @@ extends Node
 var hackerModeActivated = false
 
 var slotsInPool = 0;
+
+signal heDEAD(char: CharacterBody2D)
+
+var maxAmountOfIdeas = 4
+var currentRound: int = 0
+
 var thoughtPool: Array[Thought] = [];
 var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 

@@ -8,8 +8,21 @@ func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
 	initPool()
+
 	spawnInitialCharacters()
 	GameState.combinationEventHappend.connect(onCombinationEvent);
+
+	GameState.heDEAD.connect(popCharacter)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("debug_1"):
+		GameState.testPool1()
+	elif Input.is_action_just_pressed("debug_2"):
+		GameState.testPool2()
+	elif Input.is_action_just_pressed("debug_3"):
+		GameState.testPool3()
+	elif Input.is_action_just_pressed("debug_spawn"):
+		spawnNewCharacter()
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -97,6 +110,7 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 	if isNewToPool:
 		discoveryPopUp.visualizeNewThought(newThought);
 	
-func popCharacter():
+func popCharacter(thisChar: CharacterBody2D):
+	thisChar.queue_free()
 	pass
 	

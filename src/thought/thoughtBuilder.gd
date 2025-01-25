@@ -134,14 +134,15 @@ func fillArrayOfAllThoughts() -> void:
 	define("MISCHIEF", Thought.new("😈", 0, +5, -5, 0)) \
 		.addCombination("PLAYFULNESS", "OPPOSITION");
 		
+	define("DEATHLY_ILL", Thought.new("🤮",-20,-5,-5,0))  \
+		.addCombination("SICKNESS","SICKNESS")
 
 func combineTwo(first: Thought, second: Thought) -> Thought:
 	for name in GameState.allThoughtsDictionary.keys():
 		var thought = GameState.allThoughtsDictionary[name]
 		for combination in thought.combinations:
 			if combination.isEqualToThoughts(first, second):
-				return thought;
-				
+				return thought;		
 	
 	return null
 

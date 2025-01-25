@@ -44,8 +44,16 @@ func _ready():
 
 
 func getInitialThought():
-	currentThought = GameState.getThoughtFromPool(randi_range(0, GameState.thoughtPool.size() - 1))
-	changeEmoji(currentThought)
+	var thought = GameState.getThoughtFromPool(randi() % GameState.maxAmountOfIdeas)
+	if thought != null:
+		changeEmoji()
+		print("Thought found:", thought)
+		if thought.name == "deathlyIll":
+			deathlyIll = true
+	else:
+		print("No thought found")
+
+	
 
 func _process(delta):
 	if Input.is_action_just_pressed("debug_spawn"):
@@ -144,6 +152,7 @@ func _on_combine_timer_timeout():
 			
 	selected = false
 func _on_deathly_ill():
+	GameState.heDEAD.emit(self)
 	print("he ded")
 	
 	
