@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var grid: GridContainer = %PoolGrid;
+@onready var grid: GridContainer = $Overlay/PoolGrid;
 
 func _ready():
 	initPool()
