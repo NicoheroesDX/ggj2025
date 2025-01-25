@@ -1,3 +1,80 @@
-[gd_scene format=3 uid="uid://bcjelexlfjmse"]
+[gd_scene load_steps=4 format=3 uid="uid://bcjelexlfjmse"]
 
-[node name="Discovery" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cc4qlq0askw4c" path="res://src/world/assets/thoughtBubble.png" id="1_ovkek"]
+[ext_resource type="Theme" uid="uid://c3w1rn4k36de2" path="res://src/global/theme/textTheme.tres" id="1_wx0tx"]
+[ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="3_uqkf2"]
+
+[node name="Discovery" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(589, 327)
+scale = Vector2(0.468411, 0.468411)
+texture = ExtResource("1_ovkek")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+visible = false
+offset_left = 385.0
+offset_top = 299.0
+offset_right = 719.0
+offset_bottom = 343.0
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+gui_disable_input = true
+title = "New Thought Gained"
+initial_position = 1
+size = Vector2i(350, 100)
+popup_window = true
+keep_title_visible = false
+theme = ExtResource("1_wx0tx")
+theme_override_constants/buttons_separation = 12
+ok_button_text = "Ok"
+dialog_text = "😈"
+dialog_autowrap = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -71.0
+offset_right = 78.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wx0tx")
+theme_override_colors/default_color = Color(0.333333, 0.219608, 0.341176, 1)
+text = "New Thought Gained:"
+
+[node name="Emoji" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -6.0
+offset_right = -9.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_uqkf2")
+theme_override_font_sizes/normal_font_size = 42
+text = "😈"
+
+[node name="ThoughtTitle" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 19.0
+offset_right = 204.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wx0tx")
+theme_override_colors/default_color = Color(0.333333, 0.219608, 0.341176, 1)
+text = "MISCHIEF"
