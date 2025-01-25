@@ -43,7 +43,7 @@ func _ready():
 
 
 func getInitialThought():
-	var thought = GameState.getIdeaFromPool(randi() % GameState.maxAmountOfIdeas)
+	var thought = GameState.getThoughtFromPool(randi() % GameState.maxAmountOfIdeas)
 	if thought != null:
 		changeEmoji()
 		print("Thought found:", thought)
