@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b60o2b02idul1"]
 
 [ext_resource type="Script" path="res://src/character/code/character.gd" id="1_yfqqq"]
-[ext_resource type="Texture2D" uid="uid://o14fxcdhmocq" path="res://src/character/assets/emojis/emoji_empty.png" id="2_3hc2u"]
+[ext_resource type="Texture2D" uid="uid://o14fxcdhmocq" path="res://src/character/assets/emoji_empty.png" id="2_3hc2u"]
 [ext_resource type="Texture2D" uid="uid://bj2hp47ubmsho" path="res://src/character/assets/astronaut.png" id="3_d6qkw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrv1l"]
@@ -12,7 +12,8 @@ height = 954.0
 radius = 336.0
 height = 1026.0
 
-[node name="CharacterBody" type="CharacterBody2D" groups=["character"]]
+[node name="CharacterBody" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
 script = ExtResource("1_yfqqq")
 
 [node name="EmojiBackground" type="Sprite2D" parent="."]
@@ -32,5 +33,20 @@ shape = SubResource("CapsuleShape2D_nrv1l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_mpxav")
 
+[node name="CombineTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -263.333
+offset_top = -806.667
+offset_right = 325.667
+offset_bottom = -602.667
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="CombineTimer" to="." method="_on_combine_timer_timeout"]

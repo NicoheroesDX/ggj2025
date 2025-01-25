@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://drbt6dsp68qrq"]
+[gd_scene load_steps=6 format=3 uid="uid://drbt6dsp68qrq"]
 
 [ext_resource type="Script" path="res://src/world/code/World.gd" id="1_w37fc"]
 [ext_resource type="PackedScene" uid="uid://gvu32r5v4l84" path="res://src/world/code/CloseMap.tscn" id="2_ef761"]
 [ext_resource type="Script" path="res://src/world/code/WorldCamera.gd" id="3_5fyou"]
+[ext_resource type="PackedScene" uid="uid://b7ew8gjc5cumu" path="res://src/dome/code/dome.tscn" id="4_7c0og"]
 [ext_resource type="PackedScene" uid="uid://bnmeuxen8bkfy" path="res://src/ui-overlay/overlay.tscn" id="4_s32vu"]
 
 [node name="World" type="Node2D"]
@@ -13,4 +14,25 @@ script = ExtResource("1_w37fc")
 [node name="WorldCamera" type="Camera2D" parent="."]
 script = ExtResource("3_5fyou")
 
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PoolGrid" type="GridContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+columns = 5
+
 [node name="Overlay" parent="." instance=ExtResource("4_s32vu")]
+
+[node name="dome" parent="." instance=ExtResource("4_7c0og")]
+position = Vector2(-128, 760)
