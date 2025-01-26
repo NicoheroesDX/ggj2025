@@ -17,6 +17,8 @@ var currentO2 = 90
 var currentFood = 60
 var currentMaterial = 30
 
+var currentAstronauts: int = 0
+
 var allThoughtsDictionary: Dictionary = {};
 
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
