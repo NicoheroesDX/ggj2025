@@ -106,6 +106,7 @@ func changeEmoji(thought: Thought):
 	$EmojiPlaceholder.text = thought.unicodeSymbol;
 
 func _on_area_2d_area_entered(area):
+	$GPUParticles2D.emitting = true
 	area.get_parent().modulate = hoveringColor
 	$Sprite2D.modulate = hoveringColor 
 	$CombineTimer.start()
@@ -115,6 +116,7 @@ func _on_area_2d_area_entered(area):
 	thoughtToCombineWith = area.get_parent().currentThought
 
 func _on_area_2d_area_exited(area):
+	$GPUParticles2D.emitting = false
 	area.get_parent().modulate = standardColor
 	$Sprite2D.modulate = standardColor
 	$CombineTimer.stop()
@@ -135,7 +137,7 @@ func _on_combine_timer_timeout():
 	$ProgressBar.hide()
 	var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 	if (newThought != null):
-		GameState.showLog.emit("A new thought was created: " + newThought.displayName, true);
+		GameState.showLog.emit("A thought was created: " + newThought.displayName, true);
 
 		GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
 		GameState.applyThoughtEffect(+3, 0, 0, +3)

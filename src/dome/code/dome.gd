@@ -12,7 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if GameState.currentMaterial >= 0:
+	if GameState.currentMaterial >= 70:
 		$Button_Buy.disabled = false
 	else:
 		$Button_Buy.disabled = true
@@ -32,10 +32,10 @@ func _on_west_pressed():
 	move_west.emit()
 	$ButtonSound.play()
 
-
-
 func _on_button_buy_pressed():
 	$Graphics.visible = true
 	$Button_Buy.visible = false
 	$Button_Buy.disabled = true
+	GameState.changeMaterialStat(-70)
+	GameState.printToLog("You bought a new home for your planetlings for 70 material.", true)
 	new_dome.emit()

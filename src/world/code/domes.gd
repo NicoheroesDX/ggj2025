@@ -4,7 +4,6 @@ signal move_east_signal_map
 signal move_west_signal_map
 signal new_dome
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.connect("move_east_signal", move_east)

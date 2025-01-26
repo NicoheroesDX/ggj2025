@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b60o2b02idul1"]
+[gd_scene load_steps=19 format=3 uid="uid://b60o2b02idul1"]
 
 [ext_resource type="Script" path="res://src/character/code/character.gd" id="1_yfqqq"]
 [ext_resource type="Texture2D" uid="uid://o14fxcdhmocq" path="res://src/character/assets/emoji_empty.png" id="2_3hc2u"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://c1wukexhp3m3h" path="res://src/sounds/fusion.mp3" id="6_ufgdk"]
 [ext_resource type="AudioStream" uid="uid://bieeanwcu88si" path="res://src/sounds/success.mp3" id="7_si5io"]
 [ext_resource type="AudioStream" uid="uid://cg1h62ao0m2t6" path="res://src/sounds/fail.mp3" id="8_mdedn"]
+[ext_resource type="Texture2D" uid="uid://diyfrquvvcfxu" path="res://src/particles/bubble_1_grayscale.png" id="9_vvcxb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrv1l"]
 radius = 230.0
@@ -16,6 +17,49 @@ height = 813.333
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r1kv1"]
 radius = 310.0
 height = 893.333
+
+[sub_resource type="Gradient" id="Gradient_6jfg6"]
+offsets = PackedFloat32Array(0, 0.795082, 0.991803)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lkra5"]
+gradient = SubResource("Gradient_6jfg6")
+
+[sub_resource type="Curve" id="Curve_doxep"]
+_data = [Vector2(0, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.846667, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_03thc"]
+curve = SubResource("Curve_doxep")
+
+[sub_resource type="Curve" id="Curve_y4xft"]
+max_value = 3.0
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.98, 1.51648), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8u8qi"]
+curve = SubResource("Curve_y4xft")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y7oc5"]
+particle_flag_disable_z = true
+angle_min = -20.3
+angle_max = 60.8
+angular_velocity_min = -60.85
+angular_velocity_max = 101.41
+orbit_velocity_min = -0.338
+orbit_velocity_max = 0.0560001
+radial_velocity_min = -197.18
+radial_velocity_max = 535.22
+gravity = Vector3(0, 50, 0)
+scale_min = 0.9
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_03thc")
+scale_over_velocity_min = 0.4
+scale_over_velocity_max = 141.25
+scale_over_velocity_curve = SubResource("CurveTexture_8u8qi")
+color_ramp = SubResource("GradientTexture1D_lkra5")
+hue_variation_min = -0.28
+hue_variation_max = 0.23
 
 [node name="CharacterBody" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -78,6 +122,13 @@ stream = ExtResource("7_si5io")
 
 [node name="FailSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_mdedn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_y7oc5")
+texture = ExtResource("9_vvcxb")
+speed_scale = 2.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
