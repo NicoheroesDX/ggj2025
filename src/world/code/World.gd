@@ -124,7 +124,7 @@ func reproductionEffect():
 	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
 	if randi < chance:
 		spawnNewCharacter(-500, 500)
-		print("A new astronaut was created! Building their suit cost a bit of material." )
+		GameState.printToLog("A new astronaut was created! Building their suit cost a bit of material.", true)
 		
 
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
