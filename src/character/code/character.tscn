@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://b60o2b02idul1"]
+[gd_scene load_steps=21 format=3 uid="uid://b60o2b02idul1"]
 
 [ext_resource type="Script" path="res://src/character/code/character.gd" id="1_yfqqq"]
 [ext_resource type="Texture2D" uid="uid://o14fxcdhmocq" path="res://src/character/assets/emoji_empty.png" id="2_3hc2u"]
 [ext_resource type="Texture2D" uid="uid://bj2hp47ubmsho" path="res://src/character/assets/astronaut.png" id="3_d6qkw"]
-[ext_resource type="Theme" path="res://src/global/theme/emojiTheme.tres" id="4_lw4o1"]
+[ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="4_lw4o1"]
 [ext_resource type="Script" path="res://src/character/code/characterEmoji.gd" id="5_uad1d"]
 [ext_resource type="AudioStream" uid="uid://c1wukexhp3m3h" path="res://src/sounds/fusion.mp3" id="6_ufgdk"]
 [ext_resource type="AudioStream" uid="uid://bieeanwcu88si" path="res://src/sounds/success.mp3" id="7_si5io"]
@@ -17,6 +17,13 @@ height = 813.333
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r1kv1"]
 radius = 310.0
 height = 893.333
+
+[sub_resource type="Curve" id="Curve_tebki"]
+_data = [Vector2(0, 0.934066), 0.0, 0.0, 0, 0, Vector2(0.76, 0.582418), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xv4tv"]
+curve = SubResource("Curve_tebki")
 
 [sub_resource type="Gradient" id="Gradient_6jfg6"]
 offsets = PackedFloat32Array(0, 0.795082, 0.991803)
@@ -58,6 +65,7 @@ scale_over_velocity_min = 0.4
 scale_over_velocity_max = 141.25
 scale_over_velocity_curve = SubResource("CurveTexture_8u8qi")
 color_ramp = SubResource("GradientTexture1D_lkra5")
+alpha_curve = SubResource("CurveTexture_xv4tv")
 hue_variation_min = -0.28
 hue_variation_max = 0.23
 
@@ -125,7 +133,7 @@ stream = ExtResource("8_mdedn")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 16
+amount = 14
 process_material = SubResource("ParticleProcessMaterial_y7oc5")
 texture = ExtResource("9_vvcxb")
 speed_scale = 2.0

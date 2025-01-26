@@ -107,6 +107,7 @@ func changeEmoji(thought: Thought):
 
 func _on_area_2d_area_entered(area):
 	area.get_parent().modulate = hoveringColor
+	$GPUParticles2D.emitting = true
 	$Sprite2D.modulate = hoveringColor 
 	$CombineTimer.start()
 	$CombineSound.play()
@@ -116,6 +117,7 @@ func _on_area_2d_area_entered(area):
 
 func _on_area_2d_area_exited(area):
 	area.get_parent().modulate = standardColor
+	$GPUParticles2D.emitting = false
 	$Sprite2D.modulate = standardColor
 	$CombineTimer.stop()
 	$CombineSound.stop()
@@ -129,20 +131,19 @@ func on_area_exited():
 func _on_combine_timer_timeout():
 	var newPosition = Vector2(position.x + randf_range(-150, 150), position.y + randf_range(-150, 150))
 	self.position = newPosition
-	
-	#if (selected):
 	var thoughtBuilder = ThoughtBuilder.new();
 	$ProgressBar.hide()
 	var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 	if (newThought != null):
 		GameState.showLog.emit("A new thought was created: " + newThought.displayName, true);
-
 		GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
 		GameState.applyThoughtEffect(+3, 0, 0, +3)
 		$SuccessSound.play()
 	else:
 		GameState.showLog.emit("The combination was not successful! A few materials were wasted and your people are ab bit down about it", false)
 		var removalOfStats = int(GameState.thoughtPool.size() * 0.01)
+		print("removed:")
+		print(removalOfStats)
 		GameState.applyThoughtEffect(-removalOfStats, 0, 0, -removalOfStats)
 		$FailSound.play()
 	getNewThought()

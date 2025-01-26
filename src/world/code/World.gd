@@ -139,7 +139,18 @@ func reproductionEffect():
 
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
 	overlay.setStats(optimism, o2, food, material)
-
+	checkThreshholds(optimism, o2, food)
+			
+func checkThreshholds(optimism: int, o2: int, food: int):
+	if (optimism < 20) or (o2 < 20) or (food < 20):
+		var timer : int = 0
+		if (optimism < 20):
+			pass
+		if (food < 20):
+			pass
+		if (o2 < 20):
+			pass
+	
 func _on_domes_new_dome(position: Vector2):
 	spawnNewCharacter(position.x - 300, position.y - 800)
 	spawnNewCharacter(position.x + 300, position.y - 800)
