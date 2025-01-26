@@ -27,6 +27,7 @@ func addCombination(first: String, second: String) -> Thought:
 	var secondThought = GameState.allThoughtsDictionary[second];
 	
 	if (firstThought == null):
+		GameState.showLog("Something unspeakable happened. Thought" + first + " does not exist. Please report to your ")
 		print("ERROR: Unknown thought: " + first)
 		return null;
 	if (secondThought == null):
