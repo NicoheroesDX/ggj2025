@@ -23,8 +23,14 @@ func fillArrayOfAllThoughts() -> void:
 	define("SCIENCE", Thought.new("🧬", 5, 5, 0, 5)) \
 		.addCombination("MATERIAL", "OPTIMISM");
 		
-	define("PLANTING", Thought.new("🪴", 5,5,5,0)) \
+	define("PLANTING", Thought.new("🌱", 5,5,5,0)) \
 		.addCombination("TREE", "OPTIMISM");
+		
+	define("FRUIT", Thought.new("🍒", 5,0,5,0)) \
+		.addCombination("PLANTING", "FOOD");
+		
+	define("GARDEN", Thought.new("🪴", 5,10,0,0)) \
+		.addCombination("PLANTING", "OPTIMISM");
 		
 	define("HABITAT", Thought.new("🪹", 5,0,0,5)) \
 		.addCombination("PLANTING", "OPTIMISM");
@@ -82,6 +88,7 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("MISCHIEF", Thought.new("😈", 0, +5, -5, 0)) \
 		.addCombination("PLAYFULNESS", "OPPOSITION");
+		
 
 func combineTwo(first: Thought, second: Thought) -> Thought:
 	for name in GameState.allThoughtsDictionary.keys():
