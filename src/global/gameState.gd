@@ -36,10 +36,6 @@ func _ready():
 	addDefaultThoughtsToPool()
 	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
 
-func _process(delta: float):
-	if Input.is_action_just_pressed("debug_2"):
-		print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
-
 func printToLog(text: String, isPositive: bool):
 	showLog.emit(text, isPositive)
 
@@ -47,10 +43,6 @@ func nextRound():
 	var o2DecayPerRound = int(0.01 * currentAstronauts)
 	var foodDecayPerRound = int(0.02 * currentAstronauts + 0.5)
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
-	print ("o2 decay")
-	print(o2DecayPerRound)
-	print("food Decay")
-	print(foodDecayPerRound)
 	checkDeath()
 	currentRound += 1;
 	newRound.emit();
@@ -60,7 +52,6 @@ func checkDeath():
 	if astronautsAreDying:
 		dyingTimer += 1
 		if dyingTimer > 3:
-			print("rm one astronaut")
 			dyingTimer = 0
 			dyingByLowStat.emit()
 
