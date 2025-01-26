@@ -49,7 +49,9 @@ func getThoughtFromPool(index: int):
 # ui event
 func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
-		addNewThought(newThought);
+		addNewThought(newThought)
+	
+
 		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	currentOptimism += optimism
