@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://src/character/code/character.gd" id="1_yfqqq"]
 [ext_resource type="Texture2D" uid="uid://o14fxcdhmocq" path="res://src/character/assets/emoji_empty.png" id="2_3hc2u"]
 [ext_resource type="Texture2D" uid="uid://bj2hp47ubmsho" path="res://src/character/assets/astronaut.png" id="3_d6qkw"]
-[ext_resource type="Theme" path="res://src/global/theme/emojiTheme.tres" id="4_lw4o1"]
+[ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="4_lw4o1"]
 [ext_resource type="Script" path="res://src/character/code/characterEmoji.gd" id="5_uad1d"]
 [ext_resource type="AudioStream" uid="uid://c1wukexhp3m3h" path="res://src/sounds/fusion.mp3" id="6_ufgdk"]
 [ext_resource type="AudioStream" uid="uid://bieeanwcu88si" path="res://src/sounds/success.mp3" id="7_si5io"]
 [ext_resource type="AudioStream" uid="uid://cg1h62ao0m2t6" path="res://src/sounds/fail.mp3" id="8_mdedn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrv1l"]
-radius = 309.0
-height = 954.0
+radius = 230.0
+height = 813.333
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mpxav"]
-radius = 163.333
-height = 626.667
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r1kv1"]
+radius = 310.0
+height = 893.333
 
 [node name="CharacterBody" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -28,14 +28,14 @@ texture = ExtResource("2_3hc2u")
 texture = ExtResource("3_d6qkw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, -22)
+position = Vector2(16.6667, -23.3333)
 shape = SubResource("CapsuleShape2D_nrv1l")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(13.3334, -53.3333)
-shape = SubResource("CapsuleShape2D_mpxav")
+position = Vector2(23.3334, -46.6667)
+shape = SubResource("CapsuleShape2D_r1kv1")
 
 [node name="CombineTimer" type="Timer" parent="."]
 wait_time = 3.0
