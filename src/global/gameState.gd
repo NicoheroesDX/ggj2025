@@ -24,6 +24,8 @@ var allThoughtsDictionary: Dictionary = {};
 
 signal newRound
 
+signal showLog(text: String)
+
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 
 func _ready():

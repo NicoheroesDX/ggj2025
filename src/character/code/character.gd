@@ -106,21 +106,23 @@ func changeEmoji(thought: Thought):
 	$EmojiPlaceholder.text = thought.unicodeSymbol;
 
 func _on_area_2d_area_entered(area):
-		area.get_parent().modulate = hoveringColor
-		$Sprite2D.modulate = hoveringColor 
-		$CombineTimer.start()
-		$CombineSound.play()
-		$ProgressBar.value = 0
-		$ProgressBar.show()
-		thoughtToCombineWith = area.get_parent().currentThought
+	print("Entered!")
+	area.get_parent().modulate = hoveringColor
+	$Sprite2D.modulate = hoveringColor 
+	$CombineTimer.start()
+	$CombineSound.play()
+	$ProgressBar.value = 0
+	$ProgressBar.show()
+	thoughtToCombineWith = area.get_parent().currentThought
 
 func _on_area_2d_area_exited(area):
-		area.get_parent().modulate = standardColor
-		$Sprite2D.modulate = standardColor
-		$CombineTimer.stop()
-		$CombineSound.stop()
-		$ProgressBar.hide()
-		thoughtToCombineWith = null
+	print("Exited!")
+	area.get_parent().modulate = standardColor
+	$Sprite2D.modulate = standardColor
+	$CombineTimer.stop()
+	$CombineSound.stop()
+	$ProgressBar.hide()
+	thoughtToCombineWith = null
 
 func on_area_exited():
 	is_inside_area = false
@@ -135,18 +137,19 @@ func _on_combine_timer_timeout():
 	$ProgressBar.hide()
 	var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 	if (newThought != null):
-		print("This is the new name " + newThought.displayName);
+		GameState.showLog.emit("A new thought was created: " + currentThought.displayName);
 
 		GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
 		GameState.applyThoughtEffect(+3, 0, 0, +3)
 		$SuccessSound.play()
 	else:
-		print("Unsuccessfull combination...")
+		GameState.showLog.emit("The combination was not successful!")
 		GameState.applyThoughtEffect(-3, 0, 0, -3)
 		$FailSound.play()
 		
 	getNewThought()
 	GameState.nextRound();
+
 
 	selected = false
 

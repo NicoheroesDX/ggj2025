@@ -218,28 +218,35 @@ texture_progress = ExtResource("5_is5jh")
 script = ExtResource("2_meyj1")
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="CanvasGroup"]
+[node name="LogBase" type="Control" parent="CanvasGroup"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 44.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasGroup/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup/LogBase"]
 layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 44.0
 texture = ExtResource("7_dqxxk")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasGroup/Control"]
+[node name="LogLabel" type="RichTextLabel" parent="CanvasGroup/LogBase"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 26.0
 offset_top = 16.0
-offset_right = 700.0
-offset_bottom = 56.0
+offset_right = 1147.0
+offset_bottom = 40.0
 theme = ExtResource("4_0nryg")
 theme_override_fonts/normal_font = ExtResource("9_l534r")
 theme_override_font_sizes/normal_font_size = 16
 text = "This is a log message."
+
+[node name="Timer" type="Timer" parent="CanvasGroup/LogBase"]
+wait_time = 3.0
+one_shot = true
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = 7
@@ -296,6 +303,7 @@ offset_left = 16.0
 offset_top = 112.0
 offset_right = 1152.0
 offset_bottom = 610.0
+mouse_filter = 2
 horizontal_scroll_mode = 3
 
 [node name="PoolGrid" type="GridContainer" parent="ScrollContainer"]
@@ -308,5 +316,6 @@ size_flags_vertical = 4
 theme = ExtResource("4_0nryg")
 columns = 5
 
+[connection signal="timeout" from="CanvasGroup/LogBase/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
