@@ -39,8 +39,8 @@ func _process(delta: float):
 		print(currentRound)
 
 func nextRound():
-	var o2DecayPerRound = int(0.05 * numberOfAstronauts) + 1
-	var foodDecayPerRound = int(0.2 * numberOfAstronauts) + 1
+	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
+	var foodDecayPerRound = int(0.2 * currentAstronauts) + 1
 	
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
 	

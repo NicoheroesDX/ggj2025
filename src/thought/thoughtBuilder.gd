@@ -41,11 +41,11 @@ func fillArrayOfAllThoughts() -> void:
 	define("GARDEN", Thought.new("🪴", 5,10,0,0)) \
 		.addCombination("PLANTING", "OPTIMISM");
 		
-	define("HABITAT", Thought.new("🪹", 5,0,0,5)) \
-		.addCombination("STRUCTURE", "OPTIMISM");
-		
 	define("STRUCTURE", Thought.new("🧱",5,0,0,10)) \
 		.addCombination("MATERIAL", "MATERIAL");
+		
+	define("HABITAT", Thought.new("🪹", 5,0,0,5)) \
+		.addCombination("STRUCTURE", "OPTIMISM");
 		
 	define("RUINS", Thought.new("🏚️",-5,0,0,-10)) \
 		.addCombination("STRUCTURE", "CORROSION");

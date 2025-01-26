@@ -34,7 +34,7 @@ var deathlyIll : bool = false
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	z_index = 1
-	GameState.numberOfAstronauts += 1;
+	GameState.currentAstronauts += 1;
 	exited_area.connect(on_area_exited)
 	self.rotate(randf_range(-2,2))
 	getNewThought()
@@ -138,11 +138,11 @@ func _on_combine_timer_timeout():
 
 			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
 			GameState.applyThoughtEffect(+3, 0, 0, +3)
-      $SuccessSound.play()
+			$SuccessSound.play()
 		else:
 			print("Unsuccessfull combination...")
 			GameState.applyThoughtEffect(-3, 0, 0, -3)
-      $FailSound.play()
+			$FailSound.play()
 			
 		getNewThought()
 		GameState.nextRound();
@@ -154,5 +154,5 @@ func _on_deathly_ill():
 		$DeathTimer.start();
 	
 func _on_death_timer_timeout() -> void:
-	GameState.numberOfAstronauts -= 1;
+	GameState.currentAstronauts -= 1;
 	GameState.theyDEAD.emit(self)
