@@ -12,6 +12,7 @@ func _ready():
 	initPool()
 	spawnInitialCharacters()
 	GameState.combinationEventHappend.connect(onCombinationEvent);
+	GameState.updateStats.connect(updateStatBars)
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -59,11 +60,6 @@ func spawnNewCharacter(x: float, y: float):
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 	
-func collisionEvent():
-	# evtl. neuer Thought in den Pool (Jan und Nico)
-	# evtl. Animation (Leon)
-	pass
-	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
 
@@ -96,3 +92,7 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 	newThought.applyEffect()
 	if isNewToPool:
 		discoveryPopUp.visualizeNewThought(newThought)
+	# reproduce
+		
+func updateStatBars(optimism: int, o2: int, food: int, material: int):
+	overlay.setStats(optimism, o2, food, material)
