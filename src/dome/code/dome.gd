@@ -36,5 +36,6 @@ func _on_button_buy_pressed():
 	$Graphics.visible = true
 	$Button_Buy.visible = false
 	$Button_Buy.disabled = true
+	GameState.changeMaterialStat(-70)
 	GameState.printToLog("You bought a new home for your planetlings for 70 material.", true)
 	new_dome.emit()

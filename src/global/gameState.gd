@@ -37,7 +37,7 @@ func _ready():
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("debug_2"):
-print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
+		print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
 
 func printToLog(text: String, isPositive: bool):
 	showLog.emit(text, isPositive)
@@ -45,9 +45,11 @@ func printToLog(text: String, isPositive: bool):
 func nextRound():
 	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
 	var foodDecayPerRound = int(0.2 * currentAstronauts) + 1
-	
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
-	
+	print ("o2 decay")
+	print(o2DecayPerRound)
+	print("food Decay")
+	print(foodDecayPerRound)
 	currentRound += 1;
 	newRound.emit();
 
@@ -75,7 +77,6 @@ func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 		addNewThought(newThought)
 	
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
-	GameState.statDifference.emit(optimism, o2, food, material);
 	currentOptimism += optimism
 	currentO2 += o2
 	currentFood += food
@@ -83,6 +84,11 @@ func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	keepWithinLimits()
 	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
 	
+func changeMaterialStat(material: int):
+	currentMaterial += material
+	keepWithinLimits()
+	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
+
 func keepWithinLimits():
 	for stat in [currentOptimism, currentO2, currentFood, currentMaterial]:
 		if stat < 0:
