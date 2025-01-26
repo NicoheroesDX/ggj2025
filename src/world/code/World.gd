@@ -3,6 +3,7 @@ extends Node2D
 @onready var grid: GridContainer = $Overlay/PoolGrid;
 @onready var character = load("res://src/character/code/character.tscn");
 @onready var discoveryPopUp : Discovery = %Discovery;
+@onready var overlay : StatBars = $Overlay;
 
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
@@ -111,11 +112,9 @@ func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
 func onCombinationEvent(newThought : Thought, isNewToPool : bool):
+	newThought.applyEffect()
 	if isNewToPool:
 		discoveryPopUp.visualizeNewThought(newThought);
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
-	pass
-
-	

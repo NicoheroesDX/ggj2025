@@ -20,10 +20,11 @@ func _init(symbol: String, optimism: int, o2: int, food: int, material: int):
 	materialEffect = material;
 
 func applyEffect():
-	GameState.currentOptimism += optimismEffect;
-	GameState.currentO2 += o2Effect;
-	GameState.currentFood += foodEffect;
-	GameState.currentMaterial += materialEffect;
+	GameState.applyThoughtEffect(optimismEffect, o2Effect, foodEffect, materialEffect)
+#	GameState.currentOptimism += optimismEffect;
+#	GameState.currentO2 += o2Effect;
+#	GameState.currentFood += foodEffect;
+#	GameState.currentMaterial += materialEffect;
 
 func addCombination(first: String, second: String) -> Thought:
 	var firstThought = GameState.allThoughtsDictionary[first];

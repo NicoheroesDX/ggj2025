@@ -20,10 +20,6 @@ func fillArrayOfAllThoughts() -> void:
 	define("BLISS", Thought.new("🍭", 20, 0, -5, 0)) \
 		.addCombination("FOOD", "OPTIMISM");
 		
-	define("EUPHORIA", Thought.new("🌞", 20, 0, -5, 0)) \
-		.addCombination("BLISS", "BLISS") \
-		.addCombination("CELEBRATION", "CELEBRATION")
-		
 	define("CORROSION", Thought.new("⛓️‍💥", 0, 0, -5, -15)) \
 		.addCombination("O2", "MATERIAL");
 		
@@ -32,10 +28,6 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("SCIENCE", Thought.new("🧬", 5, 5, 0, 5)) \
 		.addCombination("MATERIAL", "OPTIMISM");
-		
-	define("HUMMUS", Thought.new("🪱", 0, +5, +5, +5)) \
-		.addCombination("CORROSION", "TREE")  \
-		.addCombination("CORROSION", "PLANTING")
 		
 	define("PLANTING", Thought.new("🌱", 5,5,5,0)) \
 		.addCombination("TREE", "OPTIMISM");
@@ -99,14 +91,22 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("BUBBLES", Thought.new("🫧", +10, -10, 0, 0)) \
 		.addCombination("PLAYFULNESS", "AIR");
+	
+	define("CONNECTION", Thought.new("🪢",+10, 0,-5,0))  \
+		.addCombination("CARE","BLISS")   \
+		.addCombination("LOVE","SHELTER")   \
+		.addCombination("WEAVE","LOVE");
 		
+	define("COMMUMITY", Thought.new("👥",+10,0,0,+5))  \
+		.addCombination("CONNECTION","CONNECTION");
+			
 	define("HATE", Thought.new("💔", -10, -5, -5, -5)) \
 		.addCombination("BOREDOM", "BOREDOM");
-		
+			
 	define("OPPOSITION", Thought.new("💢", 0, +5, 0, 0)) \
-		.addCombination("HATE", "LOVE")  \
-		.addCombination("HATE", "COMMUNITY")  \
-		.addCombination("COMMUNITY", "COMMUNITY")
+		.addCombination("HATE", "LOVE")  #\
+	#	.addCombination("HATE", "COMMUNITY")  \
+	#	.addCombination("COMMUNITY", "COMMUNITY")
 		
 	define("SAFETY", Thought.new("🚸", 5, 0, 0, 0)) \
 		.addCombination("SHELTER", "OPPOSITION");
@@ -116,14 +116,6 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("CLARITY", Thought.new("⚪", +5, 0, 0, +5)) \
 		.addCombination("BALANCE", "AIR");
-		
-	define("CONNECTION", Thought.new("🪢",+10, 0,-5,0))  \
-		.addCombination("CARE","BLISS")   \
-		.addCombination("LOVE","SHELTER")   \
-		.addCombination("WEAVE","LOVE");
-		
-	define("COMMUMITY", Thought.new("👥",+10,0,0,+5))  \
-		.addCombination("CONNECTION","CONNECTION");
 		
 	define("CELEBRATION", Thought.new("🎊",+20,-5,-5,0))  \
 		.addCombination("CONNECTION","PLAYFULNESS");
@@ -136,6 +128,15 @@ func fillArrayOfAllThoughts() -> void:
 		
 	define("DEATHLY_ILL", Thought.new("🤮",-20,-5,-5,0))  \
 		.addCombination("SICKNESS","SICKNESS")
+		
+	define("EUPHORIA", Thought.new("🌞", 20, 0, -5, 0)) \
+		.addCombination("BLISS", "BLISS") \
+		.addCombination("CELEBRATION", "CELEBRATION")
+		
+	define("HUMMUS", Thought.new("🪱", 0, +5, +5, +5)) \
+		.addCombination("CORROSION", "TREE")  \
+		.addCombination("CORROSION", "PLANTING")
+		
 
 func combineTwo(first: Thought, second: Thought) -> Thought:
 	for name in GameState.allThoughtsDictionary.keys():

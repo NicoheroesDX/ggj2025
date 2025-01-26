@@ -2,8 +2,6 @@ extends Node
 
 var hackerModeActivated = false
 
-var slotsInPool = 0;
-
 signal heDEAD(char: CharacterBody2D)
 
 signal theyDEAD(char: CharacterBody2D)
@@ -11,10 +9,16 @@ signal theyDEAD(char: CharacterBody2D)
 var maxAmountOfIdeas = 4
 var currentRound: int = 0
 
+@onready var overlay : StatBars = $Overlay
+
+signal theyDEAD(char: CharacterBody2D)
+
+signal updateStats(optimism: int, o2: int, food: int, material: int)
+
+var slotsInPool = 0;
+
 var thoughtPool: Array[Thought] = [];
 var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
-
-var currentRound: int = 0
 
 var currentOptimism = 0
 var currentO2 = 0
@@ -23,7 +27,6 @@ var currentMaterial = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
-# signal sending
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 
 func _ready():
@@ -55,3 +58,19 @@ func getThoughtFromPool(index: int):
 func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
 		addNewThought(newThought);
+		
+func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
+	currentOptimism += optimism
+	currentO2 += o2
+	currentFood += food
+	currentMaterial += material
+	keepWithinLimits()
+	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
+	#overlay.setStats(currentOptimism, currentO2, currentFood, currentMaterial)
+	
+func keepWithinLimits():
+	for stat in [currentOptimism, currentO2, currentFood, currentMaterial]:
+		if stat < 0:
+			stat = 0;
+		elif stat > 100:
+			stat = 100
