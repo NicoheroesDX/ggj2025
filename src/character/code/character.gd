@@ -34,22 +34,19 @@ var deathlyIll : bool = false
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	z_index = 1
+	GameState.numberOfAstronauts += 1;
 	exited_area.connect(on_area_exited)
 	self.rotate(randf_range(-2,2))
-	getInitialThought()
+	getNewThought()
 	$ProgressBar.show_percentage = false
 	$ProgressBar.hide()
 	$CombineTimer.wait_time = MAX_PROGRESS_TIME
 
-
-func getInitialThought():
+func getNewThought():
 	currentThought = GameState.getThoughtFromPool(randi_range(0, GameState.thoughtPool.size() - 1))
 	changeEmoji(currentThought)
 
-func _process(delta):
-	if Input.is_action_just_pressed("debug_spawn"):
-		getInitialThought()
-	
+func _process(delta):	
 	if deathlyIll == true:
 		_on_deathly_ill()
 		
@@ -101,9 +98,6 @@ func _on_area_2d_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 			selected = true
 		else:
 			selected = false
-			for body in $Area2D.get_overlapping_bodies():
-				if (body.get_groups().has("character") and (body != self and !body.selected)):
-					RoundManager.updateEventStatus.emit()
 
 func followMouse():
 	position = get_global_mouse_position() + mouse_offset
@@ -141,13 +135,17 @@ func _on_combine_timer_timeout():
 		var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 		if (newThought != null):
 			print("This is the new name " + newThought.displayName);
-			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool))
-			getInitialThought()
-			$SuccessSound.play()
+
+			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
+			GameState.applyThoughtEffect(+3, 0, 0, +3)
+      $SuccessSound.play()
 		else:
 			print("Unsuccessfull combination...")
-			getInitialThought()
-			$FailSound.play()
+			GameState.applyThoughtEffect(-3, 0, 0, -3)
+      $FailSound.play()
+			
+		getNewThought()
+		GameState.nextRound();
 
 	selected = false
 
@@ -156,4 +154,5 @@ func _on_deathly_ill():
 		$DeathTimer.start();
 	
 func _on_death_timer_timeout() -> void:
+	GameState.numberOfAstronauts -= 1;
 	GameState.theyDEAD.emit(self)
