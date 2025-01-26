@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://src/world/code/domes.gd" id="5_dragd"]
 [ext_resource type="PackedScene" uid="uid://bcjelexlfjmse" path="res://src/thought/discovery.tscn" id="7_wr7aw"]
 [ext_resource type="AudioStream" uid="uid://3qvak0rpplfm" path="res://src/world/assets/overworld.ogg" id="8_0bafh"]
-[ext_resource type="AudioStream" uid="uid://g3hhnnug6fk1" path="res://src/sounds/balloon-pop-48030.mp3" id="9_aiyd7"]
+[ext_resource type="AudioStream" uid="uid://di65051100sea" path="res://src/sounds/balloon-pop-48030.mp3" id="9_aiyd7"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_w37fc")
