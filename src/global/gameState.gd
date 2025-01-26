@@ -73,8 +73,6 @@ func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
 		addNewThought(newThought)
 	
-
-		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	GameState.statDifference.emit(optimism, o2, food, material);
 	currentOptimism += optimism
