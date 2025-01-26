@@ -5,6 +5,7 @@ extends Node2D
 @onready var discoveryPopUp : Discovery = %Discovery;
 @onready var overlay : StatBars = $Overlay;
 @onready var rng = RandomNumberGenerator.new()
+@onready var emojiTheme = preload("res://src/global/theme/emojiTheme.tres")
 
 var nextLogMessage: String
 var nextLogMessageIsPositive: bool
@@ -42,6 +43,7 @@ func renderGridCell(index: int):
 		rect.color = Color(0, 0, 0, 0.5)
 
 		var labelEmoji = Label.new()
+		labelEmoji.theme = emojiTheme
 		labelEmoji.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;
 		labelEmoji.text = optionalThought.unicodeSymbol;
 		var labelText = Label.new()
