@@ -22,6 +22,8 @@ func _ready():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_1"):
 		spawnNewCharacter(get_global_mouse_position().x, get_global_mouse_position().y);
+	#$CanvasModulate.set_color(Color(1, 1, 1, float(GameState.currentOptimism) / 100 * 2))
+
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -88,6 +90,7 @@ func removeOneCharacter():
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
+	$DeathSound.play()
 	GameState.currentAstronauts -= 1
 
 func _on_east_pressed():
@@ -128,7 +131,7 @@ func reproductionEffect():
 	var chance = float(GameState.currentOptimism) / 100
 	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
 	if randi < chance:
-		spawnNewCharacter(-500, 500)
+		spawnNewCharacter(($WorldCamera.offset.x + randf_range(-250, 250)), $WorldCamera.offset.y + randf_range(-250, 250))
 		nextLogMessage = "A new astronaut was born! Building their suit cost a bit of material."
 		nextLogMessageIsPositive = true
 		$LogMessageWithDelay.start()
