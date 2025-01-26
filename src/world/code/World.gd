@@ -6,6 +6,9 @@ extends Node2D
 @onready var overlay : StatBars = $Overlay;
 @onready var rng = RandomNumberGenerator.new()
 
+var nextLogMessage: String
+var nextLogMessageIsPositive: bool
+
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
@@ -63,7 +66,6 @@ func renderGridCell(index: int):
 
 func rerenderGridCell(index: int):
 	var cell = grid.get_child(index)
-	
 	if cell != null:
 		cell.queue_free();
 		renderGridCell(index)
@@ -121,7 +123,9 @@ func reproductionEffect():
 	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
 	if randi < chance:
 		spawnNewCharacter(-500, 500)
-		GameState.printToLog("A new astronaut was born! Building their suit cost a bit of material.", true)
+		nextLogMessage = "A new astronaut was born! Building their suit cost a bit of material."
+		nextLogMessageIsPositive = true
+		$LogMessageWithDelay.start()
 		
 
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
@@ -130,3 +134,7 @@ func updateStatBars(optimism: int, o2: int, food: int, material: int):
 func _on_domes_new_dome(position: Vector2):
 	spawnNewCharacter(position.x - 300, position.y - 800)
 	spawnNewCharacter(position.x + 300, position.y - 800)
+
+
+func _on_log_message_with_delay_timeout() -> void:
+	GameState.printToLog(nextLogMessage, nextLogMessageIsPositive);

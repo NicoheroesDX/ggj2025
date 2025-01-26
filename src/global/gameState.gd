@@ -46,9 +46,9 @@ func nextRound():
 	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
 	var foodDecayPerRound = int(0.2 * currentAstronauts) + 1
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
-	print ("o2 decay")
+	print ("o2 decay:")
 	print(o2DecayPerRound)
-	print("food Decay")
+	print("food Decay:")
 	print(foodDecayPerRound)
 	currentRound += 1;
 	newRound.emit();

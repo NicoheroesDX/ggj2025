@@ -51,6 +51,10 @@ autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
+[node name="LogMessageWithDelay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="move_east_signal_map" from="domes" to="." method="_on_domes_move_east_signal_map"]
 [connection signal="move_west_signal_map" from="domes" to="." method="_on_domes_move_west_signal_map"]
 [connection signal="new_dome" from="domes" to="." method="_on_domes_new_dome"]
@@ -69,3 +73,4 @@ autoplay = true
 [connection signal="move_east" from="domes/dome_west" to="domes" method="_on_dome_west_move_east"]
 [connection signal="move_west" from="domes/dome_west" to="domes" method="_on_dome_west_move_west"]
 [connection signal="new_dome" from="domes/dome_west" to="domes" method="_on_dome_west_new_dome"]
+[connection signal="timeout" from="LogMessageWithDelay" to="." method="_on_log_message_with_delay_timeout"]
