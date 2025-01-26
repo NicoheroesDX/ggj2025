@@ -83,7 +83,7 @@ func _on_dome_westier_new_dome():
 
 
 func _on_dome_eastier_new_dome():
-	new_dome.emit($dome_east.position)
+	new_dome.emit($dome_eastier.position)
 
 
 func _on_dome_east_new_dome():

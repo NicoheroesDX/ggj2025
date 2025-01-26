@@ -7,12 +7,15 @@ signal new_dome
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass  # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(_delta):
+	if GameState.currentMaterial >= 0:
+		$Button_Buy.disabled = false
+	else:
+		$Button_Buy.disabled = true
 
 func _on_area_2d_body_exited(body:Node2D):
 	pass
