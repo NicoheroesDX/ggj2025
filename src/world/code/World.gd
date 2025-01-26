@@ -72,6 +72,8 @@ func spawnNewCharacter(x: float, y: float):
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 	GameState.currentAstronauts += 1
+	GameState.currentO2 -= 10
+	GameState.currentFood -= 10
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
