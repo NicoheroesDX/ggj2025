@@ -20,11 +20,6 @@ func _ready():
 	GameState.combinationEventHappend.connect(onCombinationEvent);
 	GameState.updateStats.connect(updateStatBars)
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("debug_1"):
-		spawnNewCharacter(get_global_mouse_position().x, get_global_mouse_position().y);
-	#$CanvasModulate.set_color(Color(1, 1, 1, float(GameState.currentOptimism) / 100 * 2))
-
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
 	grid.columns = UIManager.poolColumns;
@@ -145,7 +140,6 @@ func checkThreshholds(optimism: int, o2: int, food: int):
 		#if (optimism < 20):
 			#GameState.printToLog
 		if (food < 20):
-			print("food low")
 			nextLogMessage = "Careful, if your food gets too low, your colony might starve"
 			nextLogMessageIsPositive = false
 			$LogMessageWithDelay.start()

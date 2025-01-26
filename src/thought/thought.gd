@@ -28,11 +28,9 @@ func addCombination(first: String, second: String) -> Thought:
 	
 	if (firstThought == null):
 		GameState.printToLog("Something unspeakable happened. Thought " + first + " does not exist. Please report to the developers.", false)
-		print("ERROR: Unknown thought: " + first)
 		return null;
 	if (secondThought == null):
 		GameState.printToLog("Something unspeakable happened. Thought " + second + " does not exist. Please report to the developers.", false)
-		print("ERROR: Unknown thought: " + second)
 		return null;
 	
 	self.combinations.append(Combination.new(firstThought, secondThought))
