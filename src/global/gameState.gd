@@ -1,5 +1,7 @@
 extends Node
 
+signal theyDEAD(char: CharacterBody2D)
+
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
 var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];

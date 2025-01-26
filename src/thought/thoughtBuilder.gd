@@ -91,6 +91,9 @@ func fillArrayOfAllThoughts() -> void:
 	define("LOVE", Thought.new("💕",+20,-5,-5,0))  \
 		.addCombination("CARE","OPTIMISM");
 		
+	define("DEATHLY_ILL", Thought.new("🤮",-20,-5,-5,0))  \
+		.addCombination("SICKNESS","SICKNESS")
+		
 	define("BOREDOM", Thought.new("☁", -5, 0, 0, 0)) \
 		.addCombination("AIR", "AIR");
 	

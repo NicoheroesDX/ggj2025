@@ -30,6 +30,8 @@ var thoughtToCombineWith: Thought
 var progress_time : float = 0
 const MAX_PROGRESS_TIME : float = 1.5
 
+var deathlyIll : bool = false
+
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	z_index = 1
@@ -48,6 +50,12 @@ func getInitialThought():
 func _process(delta):
 	if Input.is_action_just_pressed("debug_spawn"):
 		getInitialThought()
+	
+	if deathlyIll == true:
+		_on_deathly_ill()
+		
+	if currentThought.displayName == "DEATHLY_ILL":
+		deathlyIll = true
 	
 	if selected:
 		z_index = 2
@@ -73,6 +81,7 @@ func _process(delta):
 	else:
 		progress_time = 0
 		$ProgressBar.hide()
+	
 
 func _physics_process(delta):
 	if is_inside_area:
@@ -138,3 +147,10 @@ func _on_combine_timer_timeout():
 			getInitialThought()
 			
 	selected = false
+
+func _on_deathly_ill():
+	if ($DeathTimer.is_stopped()):
+		$DeathTimer.start();
+	
+func _on_death_timer_timeout() -> void:
+	GameState.theyDEAD.emit(self)

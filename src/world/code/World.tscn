@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://src/world/code/WorldCamera.gd" id="3_5fyou"]
 [ext_resource type="PackedScene" uid="uid://b7ew8gjc5cumu" path="res://src/dome/code/dome.tscn" id="4_7c0og"]
 [ext_resource type="PackedScene" uid="uid://bnmeuxen8bkfy" path="res://src/ui-overlay/overlay.tscn" id="4_s32vu"]
+[ext_resource type="Theme" uid="uid://cw5mbtuf4nnbm" path="res://src/global/theme/textTheme.tres" id="4_v478a"]
 [ext_resource type="Script" path="res://src/world/code/domes.gd" id="5_dragd"]
 [ext_resource type="PackedScene" uid="uid://bcjelexlfjmse" path="res://src/thought/discovery.tscn" id="7_wr7aw"]
 
