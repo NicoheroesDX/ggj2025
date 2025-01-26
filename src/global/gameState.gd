@@ -12,10 +12,12 @@ var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
-var currentOptimism = 60
-var currentO2 = 90
-var currentFood = 60
-var currentMaterial = 30
+var currentOptimism = 20
+var currentO2 = 20
+var currentFood = 20
+var currentMaterial = 20
+
+var currentAstronauts: int = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
@@ -27,6 +29,7 @@ func _ready():
 	slotsInPool = allThoughtsDictionary.keys().size();
 	GameState.combinationEventHappend.connect(onCombinationEvent);
 	addDefaultThoughtsToPool()
+	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
 
 func addDefaultThoughtsToPool():
 	if (hackerModeActivated):
@@ -49,7 +52,9 @@ func getThoughtFromPool(index: int):
 # ui event
 func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
-		addNewThought(newThought);
+		addNewThought(newThought)
+	
+
 		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	currentOptimism += optimism

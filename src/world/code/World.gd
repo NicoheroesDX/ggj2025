@@ -4,6 +4,7 @@ extends Node2D
 @onready var character = load("res://src/character/code/character.tscn");
 @onready var discoveryPopUp : Discovery = %Discovery;
 @onready var overlay : StatBars = $Overlay;
+@onready var rng = RandomNumberGenerator.new()
 
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
@@ -71,9 +72,13 @@ func spawnNewCharacter(x: float, y: float):
 	var newCharacter = character.instantiate()
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
+	GameState.currentAstronauts += 1
+	GameState.currentO2 -= (10 + GameState.currentAstronauts)
+	GameState.currentFood -= (10 + GameState.currentAstronauts)
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
+	GameState.currentAstronauts -= 1
 
 func _on_east_pressed():
 	var tween = get_tree().create_tween()
@@ -101,10 +106,17 @@ func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
 func onCombinationEvent(newThought : Thought, isNewToPool : bool):
-	newThought.applyEffect()
+	reproductionEffect()
 	if isNewToPool:
 		discoveryPopUp.visualizeNewThought(newThought)
-	# reproduce
+		newThought.applyEffect()
+	
+func reproductionEffect():
+	var chance = float(GameState.currentOptimism) / 100
+	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
+	if randi < chance:
+		spawnNewCharacter(-500, 500)
+		print("A new astronaut was created! Building their suit cost a bit of material." )
 		
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
 	overlay.setStats(optimism, o2, food, material)
