@@ -12,10 +12,10 @@ var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
-var currentOptimism = 0
-var currentO2 = 0
-var currentFood = 0
-var currentMaterial = 0
+var currentOptimism = 60
+var currentO2 = 90
+var currentFood = 60
+var currentMaterial = 30
 
 var allThoughtsDictionary: Dictionary = {};
 
