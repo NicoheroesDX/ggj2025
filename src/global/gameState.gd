@@ -6,12 +6,13 @@ signal heDEAD(char: CharacterBody2D)
 
 signal theyDEAD(char: CharacterBody2D)
 
-var maxAmountOfIdeas = 4
 var currentRound: int = 0
 
 @onready var overlay : StatBars = $Overlay
 
 signal updateStats(optimism: int, o2: int, food: int, material: int)
+
+var hackerModeActivated = false
 
 var slotsInPool = 0;
 
