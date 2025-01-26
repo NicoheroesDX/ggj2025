@@ -129,25 +129,27 @@ func on_area_exited():
 	selected = false
 
 func _on_combine_timer_timeout():
-	self.position = startPosition
+	var newPosition = Vector2(position.x + randf_range(-150, 150), position.y + randf_range(-150, 150))
+	self.position = newPosition
 	
-	if (selected):
-		var thoughtBuilder = ThoughtBuilder.new();
-		$ProgressBar.hide()
-		var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
-		if (newThought != null):
-			GameState.showLog.emit("A new thought was created: " + currentThought.displayName);
+	#if (selected):
+	var thoughtBuilder = ThoughtBuilder.new();
+	$ProgressBar.hide()
+	var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
+	if (newThought != null):
+		GameState.showLog.emit("A new thought was created: " + currentThought.displayName);
 
-			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
-			GameState.applyThoughtEffect(+3, 0, 0, +3)
-			$SuccessSound.play()
-		else:
-			GameState.showLog.emit("The combination was not successful!")
-			GameState.applyThoughtEffect(-3, 0, 0, -3)
-			$FailSound.play()
-			
-		getNewThought()
-		GameState.nextRound();
+		GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
+		GameState.applyThoughtEffect(+3, 0, 0, +3)
+		$SuccessSound.play()
+	else:
+		GameState.showLog.emit("The combination was not successful!")
+		GameState.applyThoughtEffect(-3, 0, 0, -3)
+		$FailSound.play()
+		
+	getNewThought()
+	GameState.nextRound();
+
 
 	selected = false
 
