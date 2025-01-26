@@ -1,5 +1,7 @@
 extends Node
 
+var hackerModeActivated = false
+
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
 var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
@@ -24,10 +26,12 @@ func _ready():
 	addDefaultThoughtsToPool()
 
 func addDefaultThoughtsToPool():
-	for name in allThoughtsDictionary.keys():
-		thoughtPool.append(GameState.allThoughtsDictionary[name])
-	#for name in baseThoughtNames:
-	#	thoughtPool.append(GameState.allThoughtsDictionary[name])
+	if (hackerModeActivated):
+		for name in allThoughtsDictionary.keys():
+			thoughtPool.append(GameState.allThoughtsDictionary[name])
+	else:
+		for name in baseThoughtNames:
+			thoughtPool.append(GameState.allThoughtsDictionary[name])
 
 func addNewThought(newThought: Thought):
 	thoughtPool.append(newThought);
