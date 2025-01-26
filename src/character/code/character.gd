@@ -53,11 +53,15 @@ func getInitialThought():
 	else:
 		print("No thought found")
 
-	
-
 func _process(delta):
 	if Input.is_action_just_pressed("debug_spawn"):
 		getInitialThought()
+	
+	if deathlyIll == true:
+		_on_deathly_ill()
+		
+	if currentThought.displayName == "DEATHLY_ILL":
+		deathlyIll = true
 	
 	if selected:
 		z_index = 2
@@ -83,7 +87,7 @@ func _process(delta):
 	else:
 		progress_time = 0
 		$ProgressBar.hide()
-		
+
 	if deathlyIll:
 		_on_deathly_ill()
 
@@ -151,8 +155,16 @@ func _on_combine_timer_timeout():
 			getInitialThought()
 			
 	selected = false
+	
 func _on_deathly_ill():
 	GameState.heDEAD.emit(self)
 	print("he ded")
 	
+	print("they deaaaaad")
+	if ($DeathTimer.is_stopped()):
+		$DeathTimer.start();
 	
+func _on_death_timer_timeout() -> void:
+	print("they ded")
+	GameState.theyDEAD.emit(self)
+	print("they ded")

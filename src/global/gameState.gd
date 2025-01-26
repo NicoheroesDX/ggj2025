@@ -6,6 +6,8 @@ var slotsInPool = 0;
 
 signal heDEAD(char: CharacterBody2D)
 
+signal theyDEAD(char: CharacterBody2D)
+
 var maxAmountOfIdeas = 4
 var currentRound: int = 0
 

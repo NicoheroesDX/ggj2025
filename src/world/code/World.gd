@@ -7,6 +7,7 @@ extends Node2D
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
+	GameState.theyDEAD.connect(popCharacter)
 	initPool()
 
 	spawnInitialCharacters()
@@ -81,6 +82,9 @@ func spawnNewCharacter(x: float, y: float):
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 
+func popCharacter(thisChar: CharacterBody2D):
+	thisChar.queue_free()
+
 func _on_east_pressed():
 	var tween = get_tree().create_tween()
 
@@ -113,4 +117,5 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
 	pass
+
 	
