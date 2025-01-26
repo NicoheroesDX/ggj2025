@@ -23,16 +23,16 @@ collision_layer = 2
 position = Vector2(142, -273)
 shape = SubResource("CircleShape2D_lpwdo")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Graphics" type="Node2D" parent="."]
 position = Vector2(619, 1360)
 scale = Vector2(4, 4)
 
-[node name="Boden" type="Sprite2D" parent="Node2D"]
+[node name="Boden" type="Sprite2D" parent="Graphics"]
 z_index = -2
 position = Vector2(-91, -590)
 texture = ExtResource("2_omiqf")
 
-[node name="Kuppel" type="Sprite2D" parent="Node2D"]
+[node name="Kuppel" type="Sprite2D" parent="Graphics"]
 position = Vector2(-91, -590)
 texture = ExtResource("3_qmeqp")
 
@@ -54,7 +54,15 @@ offset_right = 2179.0
 offset_bottom = -219.0
 text = "EAST"
 
+[node name="Button_Buy" type="Button" parent="."]
+offset_left = -601.0
+offset_top = -679.0
+offset_right = 679.0
+offset_bottom = -153.0
+text = "BUY"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="pressed" from="Navigation/WEST" to="." method="_on_west_pressed"]
 [connection signal="pressed" from="Navigation/EAST" to="." method="_on_east_pressed"]
+[connection signal="pressed" from="Button_Buy" to="." method="_on_button_buy_pressed"]

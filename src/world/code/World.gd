@@ -8,6 +8,7 @@ extends Node2D
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
+	self.connect("new_dome", _on_domes_new_dome)
 	GameState.theyDEAD.connect(popCharacter)
 	initPool()
 	spawnInitialCharacters()
@@ -96,3 +97,9 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 		
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
 	overlay.setStats(optimism, o2, food, material)
+
+
+func _on_domes_new_dome(position: Vector2):
+	print("new dome!!!", position)
+	spawnNewCharacter(position.x - 300, position.y - 800)
+	spawnNewCharacter(position.x + 300, position.y - 800)
