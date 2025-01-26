@@ -5,7 +5,6 @@ var hackerModeActivated = false
 signal theyDEAD(char: CharacterBody2D)
 
 signal updateStats(optimism: int, o2: int, food: int, material: int)
-signal statDifference(optimism: int, o2: int, food: int, material: int)
 
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
@@ -13,10 +12,10 @@ var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
-var currentOptimism = 20
-var currentO2 = 20
-var currentFood = 20
-var currentMaterial = 20
+var currentOptimism = 50
+var currentO2 = 50
+var currentFood = 50
+var currentMaterial = 50
 
 var currentAstronauts: int = 0
 
@@ -38,15 +37,17 @@ func _ready():
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("debug_2"):
-		print(currentRound)
-		
+print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
+
 func printToLog(text: String, isPositive: bool):
 	showLog.emit(text, isPositive)
 
 func nextRound():
 	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
 	var foodDecayPerRound = int(0.2 * currentAstronauts) + 1
+	
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
+	
 	currentRound += 1;
 	newRound.emit();
 

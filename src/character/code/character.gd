@@ -135,7 +135,7 @@ func _on_combine_timer_timeout():
 	$ProgressBar.hide()
 	var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 	if (newThought != null):
-		GameState.showLog.emit("A new thought was created: " + newThought.displayName, true);
+		GameState.showLog.emit("A thought was created: " + newThought.displayName, true);
 
 		GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
 		GameState.applyThoughtEffect(+3, 0, 0, +3)
