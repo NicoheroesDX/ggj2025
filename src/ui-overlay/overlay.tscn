@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="2_ai0ho"]
 [ext_resource type="Script" path="res://src/ui-overlay/statBar.gd" id="2_meyj1"]
 [ext_resource type="Texture2D" uid="uid://dwxtlmpp1c0us" path="res://src/ui-overlay/progressBar_container.png" id="3_n8gn8"]
-[ext_resource type="Theme" uid="uid://57kf03tdvstm" path="res://src/global/theme/textTheme.tres" id="4_0nryg"]
+[ext_resource type="Theme" uid="uid://cw5mbtuf4nnbm" path="res://src/global/theme/textTheme.tres" id="4_0nryg"]
 [ext_resource type="Texture2D" uid="uid://bnopqm5itmyxi" path="res://src/ui-overlay/progressBar_orange.png" id="4_36nx8"]
 [ext_resource type="Texture2D" uid="uid://bn072446qfabg" path="res://src/ui-overlay/progressBar_blue.png" id="5_is5jh"]
 [ext_resource type="Texture2D" uid="uid://buu5oda8f58nw" path="res://src/ui-overlay/logBarPink.png" id="7_dqxxk"]
@@ -228,28 +228,35 @@ texture_progress = ExtResource("5_is5jh")
 script = ExtResource("2_meyj1")
 metadata/_edit_use_anchors_ = true
 
-[node name="messageLog" type="Control" parent="CanvasGroup"]
+[node name="LogBase" type="Control" parent="CanvasGroup"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 44.0
 
-[node name="logBar" type="TextureRect" parent="CanvasGroup/messageLog"]
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup/LogBase"]
 layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 44.0
 texture = ExtResource("7_dqxxk")
 
-[node name="logTextMessage" type="RichTextLabel" parent="CanvasGroup/messageLog"]
+[node name="LogLabel" type="RichTextLabel" parent="CanvasGroup/LogBase"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 28.0
+offset_left = 26.0
 offset_top = 12.0
-offset_right = 1148.0
+offset_right = 1147.0
 offset_bottom = 36.0
 theme = ExtResource("4_0nryg")
 theme_override_fonts/normal_font = ExtResource("9_m3gr5")
 theme_override_font_sizes/normal_font_size = 26
 text = "This is a log message."
+
+[node name="Timer" type="Timer" parent="CanvasGroup/LogBase"]
+wait_time = 3.0
+one_shot = true
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = 7
@@ -306,6 +313,7 @@ offset_left = 16.0
 offset_top = 112.0
 offset_right = 1152.0
 offset_bottom = 610.0
+mouse_filter = 2
 horizontal_scroll_mode = 3
 
 [node name="PoolGrid" type="GridContainer" parent="ScrollContainer"]
@@ -318,5 +326,6 @@ size_flags_vertical = 4
 theme = ExtResource("4_0nryg")
 columns = 5
 
+[connection signal="timeout" from="CanvasGroup/LogBase/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

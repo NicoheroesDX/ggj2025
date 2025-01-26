@@ -106,46 +106,50 @@ func changeEmoji(thought: Thought):
 	$EmojiPlaceholder.text = thought.unicodeSymbol;
 
 func _on_area_2d_area_entered(area):
-		area.get_parent().modulate = hoveringColor
-		$Sprite2D.modulate = hoveringColor 
-		$CombineTimer.start()
-		$CombineSound.play()
-		$ProgressBar.value = 0
-		$ProgressBar.show()
-		thoughtToCombineWith = area.get_parent().currentThought
+	print("Entered!")
+	area.get_parent().modulate = hoveringColor
+	$Sprite2D.modulate = hoveringColor 
+	$CombineTimer.start()
+	$CombineSound.play()
+	$ProgressBar.value = 0
+	$ProgressBar.show()
+	thoughtToCombineWith = area.get_parent().currentThought
 
 func _on_area_2d_area_exited(area):
-		area.get_parent().modulate = standardColor
-		$Sprite2D.modulate = standardColor
-		$CombineTimer.stop()
-		$CombineSound.stop()
-		$ProgressBar.hide()
-		thoughtToCombineWith = null
+	print("Exited!")
+	area.get_parent().modulate = standardColor
+	$Sprite2D.modulate = standardColor
+	$CombineTimer.stop()
+	$CombineSound.stop()
+	$ProgressBar.hide()
+	thoughtToCombineWith = null
 
 func on_area_exited():
 	is_inside_area = false
 	selected = false
 
 func _on_combine_timer_timeout():
-	self.position = startPosition
+	var newPosition = Vector2(position.x + randf_range(-150, 150), position.y + randf_range(-150, 150))
+	self.position = newPosition
 	
-	if (selected):
-		var thoughtBuilder = ThoughtBuilder.new();
-		$ProgressBar.hide()
-		var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
-		if (newThought != null):
-			print("This is the new name " + newThought.displayName);
+	#if (selected):
+	var thoughtBuilder = ThoughtBuilder.new();
+	$ProgressBar.hide()
+	var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
+	if (newThought != null):
+		GameState.showLog.emit("A new thought was created: " + newThought.displayName);
 
-			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
-			GameState.applyThoughtEffect(+3, 0, 0, +3)
-			$SuccessSound.play()
-		else:
-			print("Unsuccessfull combination...")
-			GameState.applyThoughtEffect(-3, 0, 0, -3)
-			$FailSound.play()
-			
-		getNewThought()
-		GameState.nextRound();
+		GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
+		GameState.applyThoughtEffect(+3, 0, 0, +3)
+		$SuccessSound.play()
+	else:
+		GameState.showLog.emit("The combination was not successful!")
+		GameState.applyThoughtEffect(-3, 0, 0, -3)
+		$FailSound.play()
+		
+	getNewThought()
+	GameState.nextRound();
+
 
 	selected = false
 
