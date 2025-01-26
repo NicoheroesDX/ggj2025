@@ -6,6 +6,9 @@ extends Node2D
 @onready var overlay : StatBars = $Overlay;
 @onready var rng = RandomNumberGenerator.new()
 
+var nextLogMessage: String
+var nextLogMessageIsPositive: bool
+
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
@@ -65,7 +68,6 @@ func renderGridCell(index: int):
 
 func rerenderGridCell(index: int):
 	var cell = grid.get_child(index)
-	
 	if cell != null:
 		cell.queue_free();
 		renderGridCell(index)
@@ -79,11 +81,10 @@ func spawnNewCharacter(x: float, y: float):
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
 	GameState.currentAstronauts += 1
-	GameState.currentO2 -= (10 + GameState.currentAstronauts)
-	GameState.currentFood -= (10 + GameState.currentAstronauts)
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
+	$DeathSound.play()
 	GameState.currentAstronauts -= 1
 
 func _on_east_pressed():
@@ -118,7 +119,6 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 	if isNewToPool:
 		newThought.applyEffect()
 		discoveryPopUp.visualizeNewThought(newThought)
-
 		newThought.applyEffect()
 	
 func reproductionEffect():
@@ -126,7 +126,9 @@ func reproductionEffect():
 	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
 	if randi < chance:
 		spawnNewCharacter(($WorldCamera.offset.x + randf_range(-250, 250)), $WorldCamera.offset.y + randf_range(-250, 250))
-		print("A new astronaut was created! Building their suit cost a bit of material." )
+		nextLogMessage = "A new astronaut was born! Building their suit cost a bit of material."
+		nextLogMessageIsPositive = true
+		$LogMessageWithDelay.start()
 		
 
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
@@ -135,3 +137,7 @@ func updateStatBars(optimism: int, o2: int, food: int, material: int):
 func _on_domes_new_dome(position: Vector2):
 	spawnNewCharacter(position.x - 300, position.y - 800)
 	spawnNewCharacter(position.x + 300, position.y - 800)
+
+
+func _on_log_message_with_delay_timeout() -> void:
+	GameState.printToLog(nextLogMessage, nextLogMessageIsPositive);

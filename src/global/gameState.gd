@@ -5,7 +5,6 @@ var hackerModeActivated = false
 signal theyDEAD(char: CharacterBody2D)
 
 signal updateStats(optimism: int, o2: int, food: int, material: int)
-signal statDifference(optimism: int, o2: int, food: int, material: int)
 
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
@@ -13,10 +12,10 @@ var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
-var currentOptimism = 20
-var currentO2 = 20
-var currentFood = 20
-var currentMaterial = 20
+var currentOptimism = 50
+var currentO2 = 50
+var currentFood = 50
+var currentMaterial = 50
 
 var currentAstronauts: int = 0
 
@@ -24,7 +23,7 @@ var allThoughtsDictionary: Dictionary = {};
 
 signal newRound
 
-signal showLog(text: String)
+signal showLog(text: String, isPositive: bool)
 
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 
@@ -38,14 +37,19 @@ func _ready():
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("debug_2"):
-		print(currentRound)
+		print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
+
+func printToLog(text: String, isPositive: bool):
+	showLog.emit(text, isPositive)
 
 func nextRound():
-	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
-	var foodDecayPerRound = int(0.2 * currentAstronauts) + 1
-	
+	var o2DecayPerRound = int(0.005 * currentAstronauts)
+	var foodDecayPerRound = int(0.02 * currentAstronauts + 0.5)
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
-	
+	print ("o2 decay")
+	print(o2DecayPerRound)
+	print("food Decay")
+	print(foodDecayPerRound)
 	currentRound += 1;
 	newRound.emit();
 
@@ -72,10 +76,7 @@ func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
 		addNewThought(newThought)
 	
-
-		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
-	GameState.statDifference.emit(optimism, o2, food, material);
 	currentOptimism += optimism
 	currentO2 += o2
 	currentFood += food
@@ -83,6 +84,11 @@ func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	keepWithinLimits()
 	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
 	
+func changeMaterialStat(material: int):
+	currentMaterial += material
+	keepWithinLimits()
+	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
+
 func keepWithinLimits():
 	for stat in [currentOptimism, currentO2, currentFood, currentMaterial]:
 		if stat < 0:

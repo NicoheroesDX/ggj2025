@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7ew8gjc5cumu"]
+[gd_scene load_steps=7 format=3 uid="uid://b7ew8gjc5cumu"]
 
 [ext_resource type="Script" path="res://src/dome/code/dome.gd" id="1_8pqn6"]
 [ext_resource type="Texture2D" uid="uid://dsn0jl8rd5n5d" path="res://src/dome/assets/background_boden.png" id="2_omiqf"]
 [ext_resource type="Texture2D" uid="uid://78youk60x08i" path="res://src/dome/assets/background_kuppel.png" id="3_qmeqp"]
 [ext_resource type="AudioStream" uid="uid://c37yudch37t4a" path="res://src/sounds/button.mp3" id="4_2mmdo"]
+[ext_resource type="Theme" uid="uid://djuey7rdsx1h5" path="res://src/global/theme/bigTextTheme.tres" id="4_c8t24"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_067mc"]
 radius = 545.045
@@ -48,14 +49,16 @@ offset_left = -1921.0
 offset_top = -474.0
 offset_right = -1301.0
 offset_bottom = -266.0
+theme = ExtResource("4_c8t24")
 text = "WEST"
 
 [node name="EAST" type="Button" parent="Navigation"]
 unique_name_in_owner = true
-offset_left = 1559.0
+offset_left = 1532.0
 offset_top = -428.0
-offset_right = 2179.0
+offset_right = 2152.0
 offset_bottom = -219.0
+theme = ExtResource("4_c8t24")
 text = "EAST"
 
 [node name="Button_Buy" type="Button" parent="."]
@@ -63,6 +66,7 @@ offset_left = -601.0
 offset_top = -679.0
 offset_right = 679.0
 offset_bottom = -153.0
+theme = ExtResource("4_c8t24")
 text = "BUY"
 
 [node name="ButtonSound" type="AudioStreamPlayer2D" parent="."]
