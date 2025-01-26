@@ -1,7 +1,8 @@
 extends Node2D
 
-@onready var grid: GridContainer = %PoolGrid;
-@onready var character = load("res://src/character/code/character.tscn")
+@onready var grid: GridContainer = $Overlay/PoolGrid;
+@onready var character = load("res://src/character/code/character.tscn");
+@onready var discoveryPopUp : Discovery = %Discovery;
 
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
@@ -9,6 +10,7 @@ func _ready():
 	GameState.theyDEAD.connect(popCharacter)
 	initPool()
 	spawnInitialCharacters()
+	GameState.combinationEventHappend.connect(onCombinationEvent);
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -88,4 +90,7 @@ func _on_domes_move_west_signal_map():
 	_on_west_pressed()
 func _on_domes_move_east_signal_map():
 	_on_east_pressed()
-	
+
+func onCombinationEvent(newThought : Thought, isNewToPool : bool):
+	if isNewToPool:
+		discoveryPopUp.visualizeNewThought(newThought);

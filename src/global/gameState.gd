@@ -15,7 +15,8 @@ var currentMaterial = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
-signal combinationEventHappend(newThought: Thought)
+# signal sending
+signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 
 func _ready():
 	var thoughtBuilder = ThoughtBuilder.new();
@@ -29,9 +30,8 @@ func addDefaultThoughtsToPool():
 		thoughtPool.append(GameState.allThoughtsDictionary[name])
 
 func addNewThought(newThought: Thought):
-	if not newThought in thoughtPool:
-		thoughtPool.append(newThought);
-		UIManager.updatePoolItem.emit(thoughtPool.size() - 1)
+	thoughtPool.append(newThought);
+	UIManager.updatePoolItem.emit(thoughtPool.size() - 1)
 
 func getThoughtFromPool(index: int):
 	if index < thoughtPool.size() and (thoughtPool[index] != null):
@@ -39,5 +39,7 @@ func getThoughtFromPool(index: int):
 	else:
 		return null;
 
-func onCombinationEvent(newThought: Thought):
-	addNewThought(newThought)
+# ui event
+func onCombinationEvent(newThought: Thought, isNewToPool : bool):
+	if isNewToPool:
+		addNewThought(newThought);

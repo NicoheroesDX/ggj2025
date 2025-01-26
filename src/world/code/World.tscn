@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bnmeuxen8bkfy" path="res://src/ui-overlay/overlay.tscn" id="4_s32vu"]
 [ext_resource type="Theme" uid="uid://cw5mbtuf4nnbm" path="res://src/global/theme/textTheme.tres" id="4_v478a"]
 [ext_resource type="Script" path="res://src/world/code/domes.gd" id="5_dragd"]
+[ext_resource type="PackedScene" uid="uid://bcjelexlfjmse" path="res://src/thought/discovery.tscn" id="7_wr7aw"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_w37fc")
@@ -18,23 +19,6 @@ offset = Vector2(0, 650)
 zoom = Vector2(0.3, 0.3)
 script = ExtResource("3_5fyou")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PoolGrid" type="GridContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("4_v478a")
-columns = 5
-
 [node name="Overlay" parent="." instance=ExtResource("4_s32vu")]
 
 [node name="domes" type="Node2D" parent="."]
@@ -42,7 +26,7 @@ script = ExtResource("5_dragd")
 
 [node name="dome_home" parent="domes" instance=ExtResource("4_7c0og")]
 z_index = 2
-position = Vector2(0, 1370)
+position = Vector2(-92, 1370)
 
 [node name="dome_westier" parent="domes" instance=ExtResource("4_7c0og")]
 position = Vector2(-19430, 1370)
@@ -55,6 +39,10 @@ position = Vector2(9715, 1370)
 
 [node name="dome_west" parent="domes" instance=ExtResource("4_7c0og")]
 position = Vector2(-9715, 1370)
+
+[node name="Discovery" parent="." instance=ExtResource("7_wr7aw")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="move_east_signal_map" from="domes" to="." method="_on_domes_move_east_signal_map"]
 [connection signal="move_west_signal_map" from="domes" to="." method="_on_domes_move_west_signal_map"]
