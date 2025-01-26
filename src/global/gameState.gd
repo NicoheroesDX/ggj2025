@@ -35,9 +35,12 @@ func _ready():
 	addDefaultThoughtsToPool()
 	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
 
-func _process(delta: float) -> void:
+func _process(delta: float):
 	if Input.is_action_just_pressed("debug_2"):
-		print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
+print(currentO2, " ",  currentFood, " ", currentMaterial, " ", currentOptimism)
+
+func printToLog(text: String, isPositive: bool):
+	showLog.emit(text, isPositive)
 
 func nextRound():
 	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
@@ -70,9 +73,11 @@ func getThoughtFromPool(index: int):
 func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
 		addNewThought(newThought)
+	
 
+		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
-	print ("CHANGING!!! ", o2, " ",  food, " ", material, " ", optimism)
+	GameState.statDifference.emit(optimism, o2, food, material);
 	currentOptimism += optimism
 	currentO2 += o2
 	currentFood += food

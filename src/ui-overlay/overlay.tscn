@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="2_ai0ho"]
 [ext_resource type="Script" path="res://src/ui-overlay/statBar.gd" id="2_meyj1"]
 [ext_resource type="Texture2D" uid="uid://dwxtlmpp1c0us" path="res://src/ui-overlay/progressBar_container.png" id="3_n8gn8"]
-[ext_resource type="Theme" uid="uid://cw5mbtuf4nnbm" path="res://src/global/theme/textTheme.tres" id="4_0nryg"]
+[ext_resource type="Theme" uid="uid://57kf03tdvstm" path="res://src/global/theme/textTheme.tres" id="4_0nryg"]
 [ext_resource type="Texture2D" uid="uid://bnopqm5itmyxi" path="res://src/ui-overlay/progressBar_orange.png" id="4_36nx8"]
 [ext_resource type="Texture2D" uid="uid://bn072446qfabg" path="res://src/ui-overlay/progressBar_blue.png" id="5_is5jh"]
 [ext_resource type="Texture2D" uid="uid://buu5oda8f58nw" path="res://src/ui-overlay/logBarPink.png" id="7_dqxxk"]
@@ -20,9 +20,9 @@ script = ExtResource("1_ybavb")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 875.0
-offset_top = 47.0
+offset_top = 46.0
 offset_right = 1070.0
-offset_bottom = 115.0
+offset_bottom = 114.0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -78,9 +78,9 @@ script = ExtResource("2_meyj1")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 44.8
-offset_top = 47.0
+offset_top = 46.0
 offset_right = 276.8
-offset_bottom = 115.0
+offset_bottom = 114.0
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/o2Bar"]
@@ -132,9 +132,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 598.4
-offset_top = 47.0
+offset_top = 46.0
 offset_right = 830.4
-offset_bottom = 115.0
+offset_bottom = 114.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/materialBar"]
 z_index = 1
@@ -182,9 +182,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 321.6
-offset_top = 47.0
+offset_top = 46.0
 offset_right = 553.6
-offset_bottom = 115.0
+offset_bottom = 114.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/foodBar"]
 z_index = 1
@@ -230,7 +230,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LogBase" type="Control" parent="CanvasGroup"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -252,7 +251,7 @@ offset_bottom = 36.0
 theme = ExtResource("4_0nryg")
 theme_override_fonts/normal_font = ExtResource("9_m3gr5")
 theme_override_font_sizes/normal_font_size = 26
-text = "This is a log message."
+text = "Drag and drop two astronauts to let their ideas collide and see what happens."
 
 [node name="Timer" type="Timer" parent="CanvasGroup/LogBase"]
 wait_time = 3.0
