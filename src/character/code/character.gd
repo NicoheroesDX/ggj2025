@@ -155,16 +155,12 @@ func _on_combine_timer_timeout():
 			getInitialThought()
 			
 	selected = false
-	
+
 func _on_deathly_ill():
 	GameState.heDEAD.emit(self)
-	print("he ded")
-	
-	print("they deaaaaad")
+
 	if ($DeathTimer.is_stopped()):
 		$DeathTimer.start();
 	
 func _on_death_timer_timeout() -> void:
-	print("they ded")
 	GameState.theyDEAD.emit(self)
-	print("they ded")
