@@ -18,7 +18,7 @@ var currentO2 = 20
 var currentFood = 20
 var currentMaterial = 20
 
-var numberOfAstronauts = 0
+var currentAstronauts: int = 0
 
 var allThoughtsDictionary: Dictionary = {};
 
@@ -32,6 +32,7 @@ func _ready():
 	slotsInPool = allThoughtsDictionary.keys().size();
 	GameState.combinationEventHappend.connect(onCombinationEvent);
 	addDefaultThoughtsToPool()
+	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("debug_2"):
@@ -67,7 +68,9 @@ func getThoughtFromPool(index: int):
 # ui event
 func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 	if isNewToPool:
-		addNewThought(newThought);
+		addNewThought(newThought)
+	
+
 		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	GameState.statDifference.emit(optimism, o2, food, material);

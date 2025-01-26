@@ -1,18 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://b60o2b02idul1"]
+[gd_scene load_steps=11 format=3 uid="uid://b60o2b02idul1"]
 
 [ext_resource type="Script" path="res://src/character/code/character.gd" id="1_yfqqq"]
 [ext_resource type="Texture2D" uid="uid://o14fxcdhmocq" path="res://src/character/assets/emoji_empty.png" id="2_3hc2u"]
 [ext_resource type="Texture2D" uid="uid://bj2hp47ubmsho" path="res://src/character/assets/astronaut.png" id="3_d6qkw"]
-[ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="4_lw4o1"]
+[ext_resource type="Theme" path="res://src/global/theme/emojiTheme.tres" id="4_lw4o1"]
 [ext_resource type="Script" path="res://src/character/code/characterEmoji.gd" id="5_uad1d"]
+[ext_resource type="AudioStream" uid="uid://c1wukexhp3m3h" path="res://src/sounds/fusion.mp3" id="6_ufgdk"]
+[ext_resource type="AudioStream" uid="uid://bieeanwcu88si" path="res://src/sounds/success.mp3" id="7_si5io"]
+[ext_resource type="AudioStream" uid="uid://cg1h62ao0m2t6" path="res://src/sounds/fail.mp3" id="8_mdedn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nrv1l"]
 radius = 309.0
 height = 954.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mpxav"]
-radius = 336.0
-height = 1026.0
+radius = 163.333
+height = 626.667
 
 [node name="CharacterBody" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -31,6 +34,7 @@ shape = SubResource("CapsuleShape2D_nrv1l")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(13.3334, -53.3333)
 shape = SubResource("CapsuleShape2D_mpxav")
 
 [node name="CombineTimer" type="Timer" parent="."]
@@ -64,6 +68,15 @@ script = ExtResource("5_uad1d")
 
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CombineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ufgdk")
+
+[node name="SuccessSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_si5io")
+
+[node name="FailSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_mdedn")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
