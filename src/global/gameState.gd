@@ -24,7 +24,7 @@ var allThoughtsDictionary: Dictionary = {};
 
 signal newRound
 
-signal showLog(text: String)
+signal showLog(text: String, isPositive: bool)
 
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 

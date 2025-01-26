@@ -32,12 +32,9 @@ func _process(_delta):
 
 func move_east():
 	move_east_signal_map.emit()
-	print("move east")
 
 func move_west():
 	move_west_signal_map.emit()
-	print("move west")
-
 
 func _on_dome_west_move_west():
 	move_west()

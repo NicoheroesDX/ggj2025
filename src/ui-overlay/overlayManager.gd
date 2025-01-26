@@ -17,10 +17,15 @@ class_name StatBars
 func _ready() -> void:
 	GameState.showLog.connect(updateLabel)
 
-func updateLabel(logText: String):
+func updateLabel(logText: String, showGreen: bool):
 	$CanvasGroup/LogBase/Timer.wait_time = 3;
 	logBase.visible = true
 	logLabel.text = logText
+	if (showGreen):
+		logBase.modulate = Color(0, 1, 0, 1)
+	else:
+		logBase.modulate = Color(1, 1, 1, 1)  # Green tint
+	
 	$CanvasGroup/LogBase/Timer.start();
 
 func toggleInventory(isOpen: bool):
@@ -37,9 +42,6 @@ func _on_close_button_pressed() -> void:
 	toggleInventory(false)
 
 func setStats(optimism: int, o2: int, food: int, material: int):
-	var debug = "updating. opt: %s"
-	var debug_string = debug % optimism
-	print(debug_string)
 	optimismBar.value = optimism
 	o2Bar.value = o2
 	foodBar.value = food
