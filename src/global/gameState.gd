@@ -40,9 +40,8 @@ func _process(delta: float):
 	if Input.is_action_just_pressed("debug_2"):
 		print(currentRound)
 		
-func printToLog(text: String):
-	showLog.emit(text)
-	pass
+func printToLog(text: String, isPositive: bool):
+	showLog.emit(text, isPositive)
 
 func nextRound():
 	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
