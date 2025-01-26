@@ -4,6 +4,7 @@ extends Node2D
 @onready var character = load("res://src/character/code/character.tscn");
 @onready var discoveryPopUp : Discovery = %Discovery;
 @onready var overlay : StatBars = $Overlay;
+@onready var rng = RandomNumberGenerator.new()
 
 func _ready():
 	self.connect("move_east_signal_map", _on_domes_move_west_signal_map)
@@ -101,10 +102,23 @@ func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
 func onCombinationEvent(newThought : Thought, isNewToPool : bool):
-	newThought.applyEffect()
+	reproductionEffect()
 	if isNewToPool:
 		discoveryPopUp.visualizeNewThought(newThought)
+		newThought.applyEffect()
 	# reproduce
+	
+func reproductionEffect():
+	var chance = float(GameState.currentOptimism) / 100
+	print("current chance:")
+	print(chance)
+	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
+	print("randi:")
+	print(randi)
+	if randi < chance:
+		spawnNewCharacter(-500, 500)
+		print("A new astronaut was created! Building their suit cost a bit of material." )
+
 		
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
 	overlay.setStats(optimism, o2, food, material)

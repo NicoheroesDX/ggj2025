@@ -49,6 +49,8 @@ stream = ExtResource("8_0bafh")
 volume_db = -3.0
 autoplay = true
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
 [connection signal="move_east_signal_map" from="domes" to="." method="_on_domes_move_east_signal_map"]
 [connection signal="move_west_signal_map" from="domes" to="." method="_on_domes_move_west_signal_map"]
 [connection signal="new_dome" from="domes" to="." method="_on_domes_new_dome"]

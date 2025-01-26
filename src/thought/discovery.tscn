@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/thought/discovery.gd" id="1_4kilx"]
 [ext_resource type="Texture2D" uid="uid://cc4qlq0askw4c" path="res://src/world/assets/thoughtBubble.png" id="1_ovkek"]
-[ext_resource type="Theme" uid="uid://c3w1rn4k36de2" path="res://src/global/theme/textTheme.tres" id="1_wx0tx"]
+[ext_resource type="Theme" path="res://src/global/theme/textTheme.tres" id="1_wx0tx"]
 [ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="3_uqkf2"]
 
 [node name="Discovery" type="CanvasLayer"]
