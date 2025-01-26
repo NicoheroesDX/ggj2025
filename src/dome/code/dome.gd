@@ -26,9 +26,12 @@ func _on_area_2d_body_entered(body:Node2D):
 
 func _on_east_pressed():
 	move_east.emit()
+	$ButtonSound.play()
 
 func _on_west_pressed():
 	move_west.emit()
+	$ButtonSound.play()
+
 
 
 func _on_button_buy_pressed():
