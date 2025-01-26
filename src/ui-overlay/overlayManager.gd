@@ -14,6 +14,7 @@ func toggleInventory(isOpen: bool):
 	pool.visible = isOpen;
 	back.visible = isOpen;
 	close.visible = isOpen;
+	$Button/Click.play()
 
 func _on_button_pressed() -> void:
 	toggleInventory(true)

@@ -46,7 +46,7 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_0bafh")
-volume_db = -3.0
+volume_db = -12.862
 autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

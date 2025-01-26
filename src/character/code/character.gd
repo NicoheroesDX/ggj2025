@@ -31,7 +31,6 @@ var progress_time : float = 0
 const MAX_PROGRESS_TIME : float = 1.5
 
 var deathlyIll : bool = false
-
 func _ready():
 	self.scale = Vector2(scaleSize, scaleSize)
 	z_index = 1
@@ -116,6 +115,7 @@ func _on_area_2d_area_entered(area):
 		area.get_parent().modulate = hoveringColor
 		$Sprite2D.modulate = hoveringColor 
 		$CombineTimer.start()
+		$CombineSound.play()
 		$ProgressBar.value = 0
 		$ProgressBar.show()
 		thoughtToCombineWith = area.get_parent().currentThought
@@ -124,6 +124,7 @@ func _on_area_2d_area_exited(area):
 		area.get_parent().modulate = standardColor
 		$Sprite2D.modulate = standardColor
 		$CombineTimer.stop()
+		$CombineSound.stop()
 		$ProgressBar.hide()
 		thoughtToCombineWith = null
 
@@ -140,12 +141,14 @@ func _on_combine_timer_timeout():
 		var newThought = thoughtBuilder.combineTwo(currentThought, thoughtToCombineWith);
 		if (newThought != null):
 			print("This is the new name " + newThought.displayName);
-			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool));
+			GameState.combinationEventHappend.emit(newThought, !(newThought in GameState.thoughtPool))
 			getInitialThought()
+			$SuccessSound.play()
 		else:
 			print("Unsuccessfull combination...")
 			getInitialThought()
-			
+			$FailSound.play()
+
 	selected = false
 
 func _on_deathly_ill():
