@@ -72,9 +72,13 @@ func spawnNewCharacter(x: float, y: float):
 	var newCharacter = character.instantiate()
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
+	GameState.currentAstronauts += 1
+	GameState.currentO2 -= (10 + GameState.currentAstronauts)
+	GameState.currentFood -= (10 + GameState.currentAstronauts)
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
+	GameState.currentAstronauts -= 1
 
 func _on_east_pressed():
 	var tween = get_tree().create_tween()
