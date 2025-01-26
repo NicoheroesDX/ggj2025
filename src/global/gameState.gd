@@ -5,6 +5,7 @@ var hackerModeActivated = false
 signal theyDEAD(char: CharacterBody2D)
 
 signal updateStats(optimism: int, o2: int, food: int, material: int)
+signal statDifference(optimism: int, o2: int, food: int, material: int)
 
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
@@ -12,12 +13,16 @@ var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
 
-var currentOptimism = 60
-var currentO2 = 90
-var currentFood = 60
-var currentMaterial = 30
+var currentOptimism = 20
+var currentO2 = 20
+var currentFood = 20
+var currentMaterial = 20
+
+var numberOfAstronauts = 0
 
 var allThoughtsDictionary: Dictionary = {};
+
+signal newRound
 
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 
@@ -27,6 +32,19 @@ func _ready():
 	slotsInPool = allThoughtsDictionary.keys().size();
 	GameState.combinationEventHappend.connect(onCombinationEvent);
 	addDefaultThoughtsToPool()
+
+func _process(delta: float):
+	if Input.is_action_just_pressed("debug_2"):
+		print(currentRound)
+
+func nextRound():
+	var o2DecayPerRound = int(0.05 * numberOfAstronauts) + 1
+	var foodDecayPerRound = int(0.2 * numberOfAstronauts) + 1
+	
+	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
+	
+	currentRound += 1;
+	newRound.emit();
 
 func addDefaultThoughtsToPool():
 	if (hackerModeActivated):
@@ -52,6 +70,7 @@ func onCombinationEvent(newThought: Thought, isNewToPool : bool):
 		addNewThought(newThought);
 		
 func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
+	GameState.statDifference.emit(optimism, o2, food, material);
 	currentOptimism += optimism
 	currentO2 += o2
 	currentFood += food

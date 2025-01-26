@@ -21,12 +21,6 @@ func _on_button_pressed() -> void:
 func _on_close_button_pressed() -> void:
 	toggleInventory(false)
 
-func changeStats(optimism: int, o2: int, food: int, material: int):
-	optimismBar.value += optimism
-	o2Bar.value += o2
-	foodBar.value += food
-	materialBar.value += material
-	
 func setStats(optimism: int, o2: int, food: int, material: int):
 	var debug = "updating. opt: %s"
 	var debug_string = debug % optimism

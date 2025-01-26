@@ -15,6 +15,10 @@ func _ready():
 	GameState.combinationEventHappend.connect(onCombinationEvent);
 	GameState.updateStats.connect(updateStatBars)
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("debug_1"):
+		spawnNewCharacter(get_global_mouse_position().x, get_global_mouse_position().y);
+
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
 	grid.columns = UIManager.poolColumns;
@@ -101,16 +105,14 @@ func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
 func onCombinationEvent(newThought : Thought, isNewToPool : bool):
-	newThought.applyEffect()
 	if isNewToPool:
+		newThought.applyEffect()
 		discoveryPopUp.visualizeNewThought(newThought)
-	# reproduce
 		
+
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
 	overlay.setStats(optimism, o2, food, material)
 
-
 func _on_domes_new_dome(position: Vector2):
-	print("new dome!!!", position)
 	spawnNewCharacter(position.x - 300, position.y - 800)
 	spawnNewCharacter(position.x + 300, position.y - 800)
