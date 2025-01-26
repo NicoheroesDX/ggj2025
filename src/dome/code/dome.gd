@@ -22,7 +22,7 @@ func _on_area_2d_body_exited(body:Node2D):
 	body.emit_signal("exited_area")
 
 func _on_area_2d_body_entered(body:Node2D):
-	print("entered area", body)
+	pass
 
 func _on_east_pressed():
 	move_east.emit()
@@ -39,4 +39,3 @@ func _on_button_buy_pressed():
 	$Button_Buy.visible = false
 	$Button_Buy.disabled = true
 	new_dome.emit()
-	print("buy pressed")

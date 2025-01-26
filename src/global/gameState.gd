@@ -24,7 +24,7 @@ var allThoughtsDictionary: Dictionary = {};
 
 signal newRound
 
-signal showLog(text: String)
+signal showLog(text: String, isPositive: bool)
 
 signal combinationEventHappend(newThought: Thought, isNewToPool : bool)
 
@@ -35,10 +35,6 @@ func _ready():
 	GameState.combinationEventHappend.connect(onCombinationEvent);
 	addDefaultThoughtsToPool()
 	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
-
-func _process(delta: float):
-	if Input.is_action_just_pressed("debug_2"):
-		print(currentRound)
 
 func nextRound():
 	var o2DecayPerRound = int(0.05 * currentAstronauts) + 1
