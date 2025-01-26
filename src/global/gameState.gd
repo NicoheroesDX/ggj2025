@@ -24,8 +24,10 @@ func _ready():
 	addDefaultThoughtsToPool()
 
 func addDefaultThoughtsToPool():
-	for name in baseThoughtNames:
+	for name in allThoughtsDictionary.keys():
 		thoughtPool.append(GameState.allThoughtsDictionary[name])
+	#for name in baseThoughtNames:
+	#	thoughtPool.append(GameState.allThoughtsDictionary[name])
 
 func addNewThought(newThought: Thought):
 	thoughtPool.append(newThought);
