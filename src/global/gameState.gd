@@ -59,7 +59,8 @@ func checkDeath():
 	pass
 	if astronautsAreDying:
 		dyingTimer += 1
-		if dyingTimer > 5:
+		if dyingTimer > 3:
+			print("rm one astronaut")
 			dyingTimer = 0
 			dyingByLowStat.emit()
 

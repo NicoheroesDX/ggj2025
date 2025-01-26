@@ -150,6 +150,7 @@ func _on_combine_timer_timeout():
 
 func _on_deathly_ill():
 	if ($DeathTimer.is_stopped()):
+		GameState.printToLog("One of your astronauts is deathly ill and will leave this plane soon", false)
 		$DeathTimer.start();
 	
 func _on_death_timer_timeout() -> void:
