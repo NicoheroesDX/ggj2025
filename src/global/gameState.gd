@@ -1,6 +1,6 @@
 extends Node
 
-signal heDEAD(char: CharacterBody2D)
+signal theyDEAD(char: CharacterBody2D)
 
 var slotsInPool = 0;
 var thoughtPool: Array[Thought] = [];
