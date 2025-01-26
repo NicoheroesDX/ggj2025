@@ -12,7 +12,7 @@ func fillArrayOfAllThoughts() -> void:
 	define("MATERIAL", Thought.new("🪨", 0, 0, 0, +1));
 	
 	define("AIR", Thought.new("🌪️", +2, +2, 0, 0)) \
-		.addCombination("OPTIMISM", "O2");
+		.addCombination("O2", "O2");
 	
 	define("TREE", Thought.new("🌳", 0, 0, 0, +10)) \
 		.addCombination("FOOD", "MATERIAL");
@@ -42,7 +42,7 @@ func fillArrayOfAllThoughts() -> void:
 		.addCombination("PLANTING", "OPTIMISM");
 		
 	define("HABITAT", Thought.new("🪹", 5,0,0,5)) \
-		.addCombination("PLANTING", "OPTIMISM");
+		.addCombination("STRUCTURE", "OPTIMISM");
 		
 	define("STRUCTURE", Thought.new("🧱",5,0,0,10)) \
 		.addCombination("MATERIAL", "MATERIAL");
@@ -51,7 +51,7 @@ func fillArrayOfAllThoughts() -> void:
 		.addCombination("STRUCTURE", "CORROSION");
 		
 	define("WEAVE", Thought.new("🧶", 0,0,0,10)) \
-		.addCombination("O2", "MATERIAL");
+		.addCombination("STRUCTURE", "MATERIAL");
 		
 	define("YEAST", Thought.new("🦠", 0,0,10,0)) \
 		.addCombination("SCIENCE", "FOOD");
@@ -63,7 +63,7 @@ func fillArrayOfAllThoughts() -> void:
 		.addCombination("SCIENCE", "OPTIMISM");
 		
 	define("FARMING", Thought.new("🌾", 0,0,10,0)) \
-		.addCombination("PLANTING", "FOOD");
+		.addCombination("PLANTING", "FRUIT");
 
 	define("SHELTER", Thought.new("⛺", 10,5,-5,-5)) \
 		.addCombination("FILTER", "HABITAT");
@@ -104,7 +104,7 @@ func fillArrayOfAllThoughts() -> void:
 		.addCombination("CONNECTION","CONNECTION");
 			
 	define("HATE", Thought.new("💔", -10, -5, -5, -5)) \
-		.addCombination("BOREDOM", "BOREDOM");
+		.addCombination("CONNECTION", "CORROSION");
 			
 	define("OPPOSITION", Thought.new("💢", 0, +5, 0, 0)) \
 		.addCombination("HATE", "LOVE")  #\
@@ -124,7 +124,8 @@ func fillArrayOfAllThoughts() -> void:
 		.addCombination("CONNECTION","PLAYFULNESS");
 		
 	define("FEAST", Thought.new("🥞",+10, 0, -15, 0))  \
-		.addCombination("CELEBRATION","FOOD");
+		.addCombination("CELEBRATION","FOOD") \
+		.addCombination("FOOD","FOOD")
 	
 	define("MISCHIEF", Thought.new("😈", 0, +5, -5, 0)) \
 		.addCombination("PLAYFULNESS", "OPPOSITION");
