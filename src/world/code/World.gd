@@ -80,6 +80,12 @@ func spawnNewCharacter(x: float, y: float):
 	add_child(newCharacter)
 	GameState.currentAstronauts += 1
 	
+func removeOneCharacter():
+	for node in get_children():
+		if node is CharacterBody2D:
+			GameState.theyDEAD.emit(node)
+			return
+	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
 	GameState.currentAstronauts -= 1
