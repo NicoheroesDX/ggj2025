@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnmeuxen8bkfy"]
 
-[ext_resource type="Script" path="res://src/ui-overlay/overlay.gd" id="1_ybavb"]
+[ext_resource type="Script" path="res://src/ui-overlay/statBarManager.gd" id="1_ybavb"]
 [ext_resource type="Theme" uid="uid://bxc85rre337gj" path="res://src/global/theme/emojiTheme.tres" id="2_ai0ho"]
 [ext_resource type="Script" path="res://src/ui-overlay/statBar.gd" id="2_meyj1"]
 [ext_resource type="Texture2D" uid="uid://dwxtlmpp1c0us" path="res://src/ui-overlay/progressBar_container.png" id="3_n8gn8"]
@@ -20,7 +20,6 @@ offset_left = 875.0
 offset_top = 5.0
 offset_right = 1107.0
 offset_bottom = 93.0
-script = ExtResource("2_meyj1")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/optimismBar"]
@@ -62,6 +61,7 @@ scale = Vector2(5.5, 5.5)
 value = 35.0
 texture_under = ExtResource("4_36nx8")
 texture_progress = ExtResource("5_is5jh")
+script = ExtResource("2_meyj1")
 
 [node name="o2Bar" type="Control" parent="CanvasGroup"]
 layout_mode = 3
@@ -70,7 +70,6 @@ offset_left = 44.8
 offset_top = 5.0
 offset_right = 276.8
 offset_bottom = 93.0
-script = ExtResource("2_meyj1")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/o2Bar"]
@@ -111,6 +110,7 @@ scale = Vector2(5.5, 5.5)
 value = 35.0
 texture_under = ExtResource("4_36nx8")
 texture_progress = ExtResource("5_is5jh")
+script = ExtResource("2_meyj1")
 metadata/_edit_use_anchors_ = true
 
 [node name="materialBar" type="Control" parent="CanvasGroup"]
@@ -120,7 +120,6 @@ offset_left = 598.4
 offset_top = 5.0
 offset_right = 830.4
 offset_bottom = 93.0
-script = ExtResource("2_meyj1")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/materialBar"]
@@ -161,6 +160,7 @@ scale = Vector2(5.5, 5.5)
 value = 35.0
 texture_under = ExtResource("4_36nx8")
 texture_progress = ExtResource("5_is5jh")
+script = ExtResource("2_meyj1")
 metadata/_edit_use_anchors_ = true
 
 [node name="foodBar" type="Control" parent="CanvasGroup"]
@@ -170,7 +170,6 @@ offset_left = 321.6
 offset_top = 5.0
 offset_right = 553.6
 offset_bottom = 93.0
-script = ExtResource("2_meyj1")
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CanvasGroup/foodBar"]
@@ -211,6 +210,7 @@ scale = Vector2(5.5, 5.5)
 value = 35.0
 texture_under = ExtResource("4_36nx8")
 texture_progress = ExtResource("5_is5jh")
+script = ExtResource("2_meyj1")
 metadata/_edit_use_anchors_ = true
 
 [node name="PoolGrid" type="GridContainer" parent="."]

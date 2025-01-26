@@ -1,4 +1,6 @@
 extends CanvasLayer
+class_name StatBars
+
 @onready var optimismBar : TextureProgressBar = $CanvasGroup/foodBar/TextureProgressBar # : Bar
 @onready var o2Bar : TextureProgressBar = $CanvasGroup/o2Bar/TextureProgressBar;
 @onready var materialBar : TextureProgressBar = $CanvasGroup/materialBar/TextureProgressBar;
@@ -13,5 +15,16 @@ func _process(delta: float) -> void:
 	pass
 
 func changeStats(optimism: int, o2: int, food: int, material: int):
-	optimismBar.FILL_CLOCKWISE
-	pass;
+	optimismBar.value += optimism
+	o2Bar.value += o2
+	foodBar.value += food
+	materialBar.value += material
+	
+func setStats(optimism: int, o2: int, food: int, material: int):
+	var debug = "updating. opt: %s"
+	var debug_string = debug % optimism
+	print(debug_string)
+	optimismBar.value = optimism
+	o2Bar.value = o2
+	foodBar.value = food
+	materialBar.value = material
