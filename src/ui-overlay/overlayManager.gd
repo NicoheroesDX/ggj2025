@@ -6,13 +6,20 @@ class_name StatBars
 @onready var materialBar : TextureProgressBar = $CanvasGroup/materialBar/TextureProgressBar;
 @onready var foodBar : TextureProgressBar = $CanvasGroup/foodBar/TextureProgressBar;
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var pool = %PoolGrid;
+@onready var back = $Backdrop;
+@onready var close = $CloseButton;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func toggleInventory(isOpen: bool):
+	pool.visible = isOpen;
+	back.visible = isOpen;
+	close.visible = isOpen;
+
+func _on_button_pressed() -> void:
+	toggleInventory(true)
+
+func _on_close_button_pressed() -> void:
+	toggleInventory(false)
 
 func changeStats(optimism: int, o2: int, food: int, material: int):
 	optimismBar.value += optimism

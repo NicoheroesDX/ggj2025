@@ -25,25 +25,36 @@ func renderGrid():
 		renderGridCell(i)
 
 func renderGridCell(index: int):
-	var cellSize = UIManager.poolCellSize;
+	var cellSize = Vector2(UIManager.poolCellWidth, UIManager.poolCellHeight);
 	var optionalThought = GameState.getThoughtFromPool(index);
-	var cell;
-	
+	var centerContainer = CenterContainer.new();
+
+	var rect = ColorRect.new()
+	rect.custom_minimum_size = cellSize
+	rect.size = cellSize
+
 	if (optionalThought != null):
-		var button = Button.new();
-		button.custom_minimum_size = Vector2(cellSize, cellSize);
-		button.text = optionalThought.unicodeSymbol;
-		button.tooltip_text = optionalThought.displayName;
-		
-		cell = button;
+		rect.color = Color(0, 0, 0, 0.5)
+
+		var labelEmoji = Label.new()
+		labelEmoji.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;
+		labelEmoji.text = optionalThought.unicodeSymbol;
+		var labelText = Label.new()
+		labelText.text = optionalThought.displayName;
+
+		var vBox = VBoxContainer.new();
+
+		vBox.add_child(labelEmoji);
+		vBox.add_child(labelText);
+
+		centerContainer.add_child(rect);
+		centerContainer.add_child(vBox);
 	else:
-		var rect = ColorRect.new()
-		rect.custom_minimum_size = Vector2(cellSize, cellSize)
 		rect.color = Color(0, 0, 0, 0.2)
-		cell = rect;
-		
-	grid.add_child(cell)
-	grid.move_child(cell, index)
+		centerContainer.add_child(rect);
+
+	grid.add_child(centerContainer)
+	grid.move_child(centerContainer, index)
 
 func rerenderGridCell(index: int):
 	var cell = grid.get_child(index)

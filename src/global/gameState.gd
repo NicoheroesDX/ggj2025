@@ -1,5 +1,7 @@
 extends Node
 
+var hackerModeActivated = false
+
 signal theyDEAD(char: CharacterBody2D)
 
 signal updateStats(optimism: int, o2: int, food: int, material: int)
@@ -27,8 +29,12 @@ func _ready():
 	addDefaultThoughtsToPool()
 
 func addDefaultThoughtsToPool():
-	for name in baseThoughtNames:
-		thoughtPool.append(GameState.allThoughtsDictionary[name])
+	if (hackerModeActivated):
+		for name in allThoughtsDictionary.keys():
+			thoughtPool.append(GameState.allThoughtsDictionary[name])
+	else:
+		for name in baseThoughtNames:
+			thoughtPool.append(GameState.allThoughtsDictionary[name])
 
 func addNewThought(newThought: Thought):
 	thoughtPool.append(newThought);
