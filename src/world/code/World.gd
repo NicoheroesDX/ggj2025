@@ -13,6 +13,7 @@ func _ready():
 
 	spawnInitialCharacters()
 	GameState.combinationEventHappend.connect(onCombinationEvent);
+	GameState.updateStats.connect(updateStatBars)
 
 	GameState.heDEAD.connect(popCharacter)
 
@@ -82,7 +83,11 @@ func spawnNewCharacter(x: float, y: float):
 	var newCharacter = character.instantiate()
 	newCharacter.position = Vector2(x, y)
 	add_child(newCharacter)
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 1741fd0 (finish bar logic)
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
 
@@ -118,3 +123,6 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
+		
+func updateStatBars(optimism: int, o2: int, food: int, material: int):
+	overlay.setStats(optimism, o2, food, material)

@@ -11,8 +11,6 @@ var currentRound: int = 0
 
 @onready var overlay : StatBars = $Overlay
 
-signal theyDEAD(char: CharacterBody2D)
-
 signal updateStats(optimism: int, o2: int, food: int, material: int)
 
 var slotsInPool = 0;
@@ -66,7 +64,6 @@ func applyThoughtEffect(optimism: int, o2: int, food: int, material: int):
 	currentMaterial += material
 	keepWithinLimits()
 	updateStats.emit(currentOptimism, currentO2, currentFood, currentMaterial)
-	#overlay.setStats(currentOptimism, currentO2, currentFood, currentMaterial)
 	
 func keepWithinLimits():
 	for stat in [currentOptimism, currentO2, currentFood, currentMaterial]:
