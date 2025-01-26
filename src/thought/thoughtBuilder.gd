@@ -68,7 +68,7 @@ func fillArrayOfAllThoughts() -> void:
 	define("SHELTER", Thought.new("⛺", 10,5,-5,-5)) \
 		.addCombination("FILTER", "HABITAT");
 		
-	define("SICKNESS", Thought.new("🤢 ",-10,-5,0,0))  \
+	define("SICKNESS", Thought.new("🤢",-10,-5,0,0))  \
 		.addCombination("YEAST", "FOOD");
 		
 	define("CARE", Thought.new("🤒",+15,0,0,0))  \
