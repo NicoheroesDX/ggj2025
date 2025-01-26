@@ -82,6 +82,7 @@ func spawnNewCharacter(x: float, y: float):
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
+	$DeathSound.play()
 	GameState.currentAstronauts -= 1
 
 func _on_east_pressed():
