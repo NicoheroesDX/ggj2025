@@ -14,6 +14,7 @@ func _ready():
 	self.connect("move_west_signal_map", _on_domes_move_west_signal_map)
 	self.connect("new_dome", _on_domes_new_dome)
 	GameState.theyDEAD.connect(popCharacter)
+	GameState.dyingByLowStat.connect(removeOneCharacter)
 	initPool()
 	spawnInitialCharacters()
 	GameState.combinationEventHappend.connect(onCombinationEvent);
@@ -23,7 +24,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_1"):
 		spawnNewCharacter(get_global_mouse_position().x, get_global_mouse_position().y);
 	#$CanvasModulate.set_color(Color(1, 1, 1, float(GameState.currentOptimism) / 100 * 2))
-
 
 func initPool():
 	UIManager.updatePoolItem.connect(rerenderGridCell);
@@ -83,10 +83,11 @@ func spawnNewCharacter(x: float, y: float):
 	GameState.currentAstronauts += 1
 	
 func removeOneCharacter():
-	for node in get_children():
-		if node is CharacterBody2D:
-			GameState.theyDEAD.emit(node)
-			return
+	if get_child_count() > 2:
+		for node in get_children():
+			if node is CharacterBody2D:
+				GameState.theyDEAD.emit(node)
+				return
 	
 func popCharacter(thisChar: CharacterBody2D):
 	thisChar.queue_free()
@@ -119,9 +120,7 @@ func _on_domes_move_east_signal_map():
 	_on_east_pressed()
 
 func onCombinationEvent(newThought : Thought, isNewToPool : bool):
-
 	reproductionEffect()
-
 	if isNewToPool:
 		newThought.applyEffect()
 		discoveryPopUp.visualizeNewThought(newThought)
@@ -129,32 +128,40 @@ func onCombinationEvent(newThought : Thought, isNewToPool : bool):
 	
 func reproductionEffect():
 	var chance = float(GameState.currentOptimism) / 100
-	var randi = rng.randf_range(0,1) # wenn randi kleiner ist als percentChance
+	var randi = rng.randf_range(0,1)
 	if randi < chance:
 		spawnNewCharacter(($WorldCamera.offset.x + randf_range(-250, 250)), $WorldCamera.offset.y + randf_range(-250, 250))
 		nextLogMessage = "A new astronaut was born! Building their suit cost a bit of material."
 		nextLogMessageIsPositive = true
 		$LogMessageWithDelay.start()
-		
 
 func updateStatBars(optimism: int, o2: int, food: int, material: int):
 	overlay.setStats(optimism, o2, food, material)
 	checkThreshholds(optimism, o2, food)
 			
 func checkThreshholds(optimism: int, o2: int, food: int):
-	if (optimism < 20) or (o2 < 20) or (food < 20):
+	if (o2 < 20) or (food < 20): # todo or (optimism < 20) : warn depression
 		var timer : int = 0
-		if (optimism < 20):
-			pass
+		#if (optimism < 20):
+			#GameState.printToLog
 		if (food < 20):
-			pass
+			print("food low")
+			nextLogMessage = "Careful, if your food gets too low, your colony might starve"
+			nextLogMessageIsPositive = false
+			$LogMessageWithDelay.start()
 		if (o2 < 20):
-			pass
+			nextLogMessage = "Careful, if your food gets too low, most astronauts cannot survive"
+			nextLogMessageIsPositive = false
+			$LogMessageWithDelay.start()
+	if (o2 < 10) or (food < 10):
+		print ("critical")
+		GameState.astronautsAreDying = true
+	else:
+		GameState.astronautsAreDying = false
 	
 func _on_domes_new_dome(position: Vector2):
 	spawnNewCharacter(position.x - 300, position.y - 800)
 	spawnNewCharacter(position.x + 300, position.y - 800)
-
 
 func _on_log_message_with_delay_timeout() -> void:
 	GameState.printToLog(nextLogMessage, nextLogMessageIsPositive);

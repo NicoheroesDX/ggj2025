@@ -3,7 +3,7 @@ extends Node
 var hackerModeActivated = false
 
 signal theyDEAD(char: CharacterBody2D)
-
+signal dyingByLowStat
 signal updateStats(optimism: int, o2: int, food: int, material: int)
 
 var slotsInPool = 0;
@@ -11,11 +11,12 @@ var thoughtPool: Array[Thought] = [];
 var baseThoughtNames: Array[String] = ["OPTIMISM", "O2", "FOOD", "MATERIAL"];
 
 var currentRound: int = 0
-
 var currentOptimism = 50
 var currentO2 = 50
 var currentFood = 50
 var currentMaterial = 50
+var astronautsAreDying = false
+var dyingTimer = 0
 
 var currentAstronauts: int = 0
 
@@ -43,15 +44,24 @@ func printToLog(text: String, isPositive: bool):
 	showLog.emit(text, isPositive)
 
 func nextRound():
-	var o2DecayPerRound = int(0.005 * currentAstronauts)
+	var o2DecayPerRound = int(0.01 * currentAstronauts)
 	var foodDecayPerRound = int(0.02 * currentAstronauts + 0.5)
 	applyThoughtEffect(0, -o2DecayPerRound, -foodDecayPerRound, 0)
 	print ("o2 decay")
 	print(o2DecayPerRound)
 	print("food Decay")
 	print(foodDecayPerRound)
+	checkDeath()
 	currentRound += 1;
 	newRound.emit();
+	
+func checkDeath():
+	pass
+	if astronautsAreDying:
+		dyingTimer += 1
+		if dyingTimer > 5:
+			dyingTimer = 0
+			dyingByLowStat.emit()
 
 func addDefaultThoughtsToPool():
 	if (hackerModeActivated):
