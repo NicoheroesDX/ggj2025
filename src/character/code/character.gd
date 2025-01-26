@@ -144,7 +144,8 @@ func _on_combine_timer_timeout():
 		$SuccessSound.play()
 	else:
 		GameState.showLog.emit("The combination was not successful!", false)
-		GameState.applyThoughtEffect(-3, 0, 0, -3)
+		var removalOfStats = int(GameState.thoughtPool.size() * 0.01)
+		GameState.applyThoughtEffect(-removalOfStats, 0, 0, -removalOfStats)
 		$FailSound.play()
 		
 	getNewThought()
