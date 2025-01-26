@@ -25,8 +25,7 @@ func updateLabel(logText: String, showGreen: bool):
 		logBase.modulate = Color(0, 1, 0, 1)
 	else:
 		logBase.modulate = Color(1, 1, 1, 1)  # Green tint
-	
-	$CanvasGroup/LogBase/Timer.start();
+	#$CanvasGroup/LogBase/Timer.start();
 
 func toggleInventory(isOpen: bool):
 	pool.visible = isOpen;
