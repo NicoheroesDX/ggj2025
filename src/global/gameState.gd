@@ -1,6 +1,6 @@
 extends Node
 
-var hackerModeActivated = true
+var hackerModeActivated = false
 
 signal theyDEAD(char: CharacterBody2D)
 
