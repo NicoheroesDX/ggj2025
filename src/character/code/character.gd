@@ -106,6 +106,7 @@ func changeEmoji(thought: Thought):
 	$EmojiPlaceholder.text = thought.unicodeSymbol;
 
 func _on_area_2d_area_entered(area):
+	$GPUParticles2D.emitting = true
 	area.get_parent().modulate = hoveringColor
 	$Sprite2D.modulate = hoveringColor 
 	$CombineTimer.start()
@@ -115,6 +116,7 @@ func _on_area_2d_area_entered(area):
 	thoughtToCombineWith = area.get_parent().currentThought
 
 func _on_area_2d_area_exited(area):
+	$GPUParticles2D.emitting = false
 	area.get_parent().modulate = standardColor
 	$Sprite2D.modulate = standardColor
 	$CombineTimer.stop()
