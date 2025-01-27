@@ -47,13 +47,14 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_0bafh")
-volume_db = -12.862
+volume_db = -12.0
 autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_aiyd7")
+volume_db = -4.0
 pitch_scale = 0.7
 
 [node name="LogMessageWithDelay" type="Timer" parent="."]

@@ -124,12 +124,15 @@ one_shot = true
 
 [node name="CombineSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ufgdk")
+volume_db = -12.0
 
 [node name="SuccessSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_si5io")
+volume_db = -2.0
 
 [node name="FailSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_mdedn")
+volume_db = -2.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
