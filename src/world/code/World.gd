@@ -46,8 +46,9 @@ func renderGridCell(index: int):
 		labelEmoji.theme = emojiTheme
 		labelEmoji.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;
 		labelEmoji.text = optionalThought.unicodeSymbol;
+		labelEmoji.add_theme_font_size_override("font_size", 24)
 		var labelText = Label.new()
-		labelText.text = optionalThought.displayName;
+		labelText.text = optionalThought.displayName.replace("_", " ");
 
 		var vBox = VBoxContainer.new();
 
