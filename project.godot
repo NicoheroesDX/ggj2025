@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="ggj2025"
+config/name="Alchemy Space Bubble"
 run/main_scene="res://src/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://src/character/assets/astronaut.png"
 
 [autoload]
 
